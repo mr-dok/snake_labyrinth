@@ -16,20 +16,14 @@
 #include "colors.h"
 
 int main(void) {
-  printf("Enter ");
-  scanf("");
-
-
   int M = 0, N = 0;
   
+  printf("Enter the number of columns:\n");
   scanf("%d", &M);
+  getchar();
+  printf("Enter the number of rows\n");
   scanf("%d", &N);
-   
-  for (int i = 0; i < N; i++) {
-    char *s = (char *) malloc(M + 1);
-    scanf("%[^\n]s", s);
-    sleep(1);    
-    printf("%s\n", s);
-  }
+  getchar();
+  labyrinth_run(M, N);
   return 0;
 }
