@@ -1,9 +1,6 @@
 CC = gcc
 CFLAGS = -std=c99 -pedantic-errors -Wall -O0 -Wno-unused-result -g
 
-snake: main.c 
-	gcc -Wall -pedantic -std=c99 -o bin/main main.c
-
 .PHONY: snake
 snake: snake.o main.o
 	$(CC) $(CFLAGS) bin/snake.o bin/main.o -o bin/snake
