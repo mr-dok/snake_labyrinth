@@ -15,13 +15,13 @@
 #include "snake.h"
 #include "colors.h"
 
-int main(void) {
+int main (void) {
   int M = 0, N = 0;
   
-  printf("Enter the number of columns:\n");
+  printf("Enter the number of columns: ");
   scanf("%d", &M);
   getchar();
-  printf("Enter the number of rows\n");
+  printf("Enter the number of rows: ");
   scanf("%d", &N);
   getchar();
   labyrinth_run(M, N);
