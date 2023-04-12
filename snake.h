@@ -7,10 +7,12 @@ typedef struct labyrinth labyrinth_t;
 
 void labyrinth_run (int M, int N);
 
-void labyrinth_init (labyrinth_t *l, int M, int N);
+void labyrinth_init (labyrinth_t *l, int M, int N, snake_t *s);
 
-void labyrinth_print (labyrinth_t *l, int M, int N);
+void labyrinth_print (labyrinth_t *l, int M, int N, snake_t *s);
 
-void move_snake (labyrinth_t *l, snake_t *s, int x, int y);
+void labyrinth_free (labyrinth_t *l, snake_t *s);
+
+void find_initial_position (labyrinth_t *l, int *x, int *y);
 
 #endif

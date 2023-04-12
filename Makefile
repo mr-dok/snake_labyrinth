@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -std=c99 -pedantic-errors -Wall -O0 -Wno-unused-result -g
+CFLAGS = -std=c99 -pedantic-errors -Wall -Wextra -O0 -Wno-unused-result -g
 
 .PHONY: snake
 snake: snake.o main.o

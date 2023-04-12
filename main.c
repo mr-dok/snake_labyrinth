@@ -17,13 +17,14 @@
 
 int main (void) {
   int M = 0, N = 0;
-  
   printf("Enter the number of columns: ");
   scanf("%d", &M);
   getchar();
+  
   printf("Enter the number of rows: ");
   scanf("%d", &N);
   getchar();
+  
   labyrinth_run(M, N);
   return 0;
 }
