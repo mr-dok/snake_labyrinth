@@ -142,6 +142,7 @@ void labyrinth_run(int M, int N) {
 
     if (l->labyrinth_matrix[row][col] == '!') {
       l->score = 1000 + ((l->score - 1000) / 2);
+      l->labyrinth_matrix[row][col] = ' ';
     }
     
     if (l->labyrinth_matrix[row][col] == 'T')
