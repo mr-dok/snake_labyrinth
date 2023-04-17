@@ -145,8 +145,10 @@ void labyrinth_run(int M, int N) {
       l->labyrinth_matrix[row][col] = ' ';
     }
     
-    if (l->labyrinth_matrix[row][col] == 'T')
+    if (l->labyrinth_matrix[row][col] == 'T') {
       l->drill += 3;
+      l->labyrinth_matrix[row][col] = ' ';
+    }
 
     s->y_snake_pos = row;
     s->x_snake_pos = col;
