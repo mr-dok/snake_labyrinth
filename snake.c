@@ -56,6 +56,7 @@ void labyrinth_print(labyrinth_t *l, int M, int N, snake_t *s) {
     printf("\n");
   }
   printf("SCORE: %d\n", l->score);
+  printf("DRILL: %d\n", l->drill);
 }
 
 void find_initial_position(labyrinth_t *l, int *x, int *y) {
@@ -125,12 +126,12 @@ void labyrinth_run(int M, int N) {
         break;
     }
 
-    if (l->labyrinth_matrix[row][col] == '#' && l->drill > 0 && (row > 0 || row < N) && (col > 0 || col < M)) {
+    if (l->labyrinth_matrix[row][col] == '#' && l->drill > 0 && (row > 0 && row < N) && (col > 0 && col < M)) {
       l->drill -= 1;
       l->labyrinth_matrix[row][col] = ' ';
     }
 
-    if (row < 0 || row >= N || col < 0 || col >= M) {
+    if (row <= 0 || row >= N || col <= 0 || col >= M) {
       printf("Invalid move!\n");
       return;
     }
