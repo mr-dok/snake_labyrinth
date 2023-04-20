@@ -1,4 +1,5 @@
 #include "snake.h"
+#include "colors.h"
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -48,15 +49,39 @@ void labyrinth_free(labyrinth_t *l, snake_t* s) {
 void labyrinth_print(labyrinth_t *l, int M, int N, snake_t *s) {
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < M; j++) {
-      if (j == s->x_snake_pos && i == s->y_snake_pos)
-        printf("%c", s->data);
-      else
-        printf("%c", l->labyrinth_matrix[i][j]);
+      if (j == s->x_snake_pos && i == s->y_snake_pos) {
+        printf(BOLD_COLOR_WHITE "%c", s->data);
+        printf(COLOR_RESET);
+      } else {
+        if (l->labyrinth_matrix[i][j] == '#') {
+          printf(BOLD_COLOR_RED "%c", l->labyrinth_matrix[i][j]);
+          printf(COLOR_RESET);
+        } else {
+          if (l->labyrinth_matrix[i][j] == '$') {
+            printf(BOLD_COLOR_PURPLE "%c", l->labyrinth_matrix[i][j]);
+            printf(COLOR_RESET);
+          } else {
+            if (l->labyrinth_matrix[i][j] == 'T') {
+              printf(BOLD_COLOR_BLUE "%c", l->labyrinth_matrix[i][j]);
+              printf(COLOR_RESET);
+            } else {
+              if (l->labyrinth_matrix[i][j] == '!') {
+                printf(BOLD_COLOR_GREEN "%c", l->labyrinth_matrix[i][j]);
+                printf(COLOR_RESET);
+              } else {
+                printf("%c", l->labyrinth_matrix[i][j]);
+              }
+            }
+          }
+        }
+      }
     }
     printf("\n");
   }
-  printf("SCORE: %d\n", l->score);
-  printf("DRILL: %d\n", l->drill);
+  printf(COLOR_WHITE_HIGH_BACKGROUND BOLD_COLOR_BLACK "SCORE: %d\n", l->score);
+  printf(COLOR_RESET);
+  printf(COLOR_WHITE_HIGH_BACKGROUND BOLD_COLOR_BLACK "DRILL: %d\n", l->drill);
+  printf(COLOR_RESET);
 }
 
 void find_initial_position(labyrinth_t *l, int *x, int *y) {
@@ -93,7 +118,8 @@ void labyrinth_run(int M, int N) {
     system("clear");
     labyrinth_print(l, l->M, l->N, s);
 
-    printf("Enter a move (N/S/E/O): ");
+    printf(BOLD_COLOR_WHITE "Enter a move (" BOLD_COLOR_GREEN "N" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "S" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "E" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "O" BOLD_COLOR_WHITE "): ");
+    printf(COLOR_RESET);
     scanf("%c", &move);
     move = getchar();
 
@@ -158,7 +184,7 @@ void labyrinth_run(int M, int N) {
       *(tmp++) = '\0';
       moves = realloc(moves, tmp-moves);
       system("clear");
-      printf("%s\n", moves);
+      printf(COLOR_GREEN_HIGH_BACKGROUND BOLD_COLOR_BLACK "%s\n", moves);
       win = true;
     }
   }

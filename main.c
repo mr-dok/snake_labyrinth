@@ -17,11 +17,11 @@
 
 int main (void) {
   int M = 0, N = 0;
-  printf("Enter the number of columns: ");
+  printf(BOLD_COLOR_WHITE "Enter the number of columns: " COLOR_RESET);  
   scanf("%d", &M);
   getchar();
   
-  printf("Enter the number of rows: ");
+  printf(BOLD_COLOR_WHITE "Enter the number of rows: " COLOR_RESET);
   scanf("%d", &N);
   getchar();
   
