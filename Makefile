@@ -10,8 +10,14 @@ main.o: main.c snake.h
 	$(CC) $(CFLAGS) -c main.c -o bin/main.o
 
 .PHONY: snake.o
-snake.o: snake.c snake.h
+snake.o: snake.c snake.h create_dir
 	$(CC) $(CFLAGS) -c snake.c -o bin/snake.o
+
+.PHONY: create_dir
+create_dir:
+ifeq ($(wildcard bin),)
+	mkdir -p bin
+endif
 
 .PHONY: valgrind
 valgrind: snake
