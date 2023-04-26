@@ -6,7 +6,7 @@
 #include <stdlib.h>
 
 struct snake {
-  char data;
+  char head;
   int x_snake_pos;
   int y_snake_pos;
   snake_t *next;
@@ -27,7 +27,7 @@ void labyrinth_init(labyrinth_t *l, int M, int N, snake_t *s) {
   l->score = 1000;
   l->drill = 0;
 
-  s->data = 'o';
+  s->head = 'o';
   s->x_snake_pos = 0;
   s->y_snake_pos = 0;
   s->next = NULL;
@@ -50,7 +50,7 @@ void labyrinth_print(labyrinth_t *l, int M, int N, snake_t *s) {
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < M; j++) {
       if (j == s->x_snake_pos && i == s->y_snake_pos) {
-        printf(BOLD_COLOR_WHITE "%c", s->data);
+        printf(BOLD_COLOR_WHITE "%c", s->head);
         printf(COLOR_RESET);
       } else {
         if (l->labyrinth_matrix[i][j] == '#') {
@@ -169,7 +169,7 @@ void labyrinth_run(int M, int N) {
       while (tail->next != NULL)
         tail = tail->next;
       tail->next = (snake_t*) malloc(sizeof(snake_t));
-      tail->next->data = 'o';
+      tail->next->head = 'o';
       tail->next->x_snake_pos = s->x_snake_pos;
       tail->next->y_snake_pos = s->y_snake_pos;
       tail->next->next = NULL;
