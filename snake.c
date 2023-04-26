@@ -165,6 +165,14 @@ void labyrinth_run(int M, int N) {
     if (l->labyrinth_matrix[row][col] == '$') {
       l->score += 10;
       l->labyrinth_matrix[row][col] = ' ';
+      snake_t *tail = s;
+      while (tail->next != NULL)
+        tail = tail->next;
+      tail->next = (snake_t*) malloc(sizeof(snake_t));
+      tail->next->data = 'o';
+      tail->next->x_snake_pos = s->x_snake_pos;
+      tail->next->y_snake_pos = s->y_snake_pos;
+      tail->next->next = NULL;
     }
 
     if (l->labyrinth_matrix[row][col] == '!') {
