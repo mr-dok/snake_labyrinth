@@ -98,6 +98,14 @@ void labyrinth_print(labyrinth_t *l, int M, int N, snake_t *s) {
   printf(COLOR_RESET);
   printf(COLOR_WHITE_HIGH_BACKGROUND BOLD_COLOR_BLACK "DRILL: %d\n", l->drill);
   printf(COLOR_RESET);
+  while(s!=NULL)
+  {
+    printf(COLOR_WHITE_HIGH_BACKGROUND BOLD_COLOR_BLACK "X: %d\n", s->x_snake_pos);
+    printf(COLOR_RESET);
+    printf(COLOR_WHITE_HIGH_BACKGROUND BOLD_COLOR_BLACK "Y: %d\n", s->y_snake_pos);
+    printf(COLOR_RESET);
+    s=s->next;
+  }
 }
 
 void find_initial_position(labyrinth_t *l, int *x, int *y) {
@@ -167,7 +175,6 @@ void labyrinth_run(int M, int N) {
         printf("Invalid move!\n");
         break;
     }
-
     if (l->labyrinth_matrix[row][col] == '#' && l->drill > 0 && (row > 0 || row < N) && (col > 0 || col < M)) {
       l->drill -= 1;
       l->labyrinth_matrix[row][col] = ' ';
@@ -203,15 +210,6 @@ void labyrinth_run(int M, int N) {
 
     s->y_snake_pos = row;
     s->x_snake_pos = col;
-    snake_t *node = s;
-    while (node->next != NULL) {
-        int tmp_x = node->x_snake_pos, tmp_y = node->y_snake_pos;
-        node->x_snake_pos = row;
-        node->y_snake_pos = col;
-        row = tmp_x;
-        col = tmp_y;
-        node = node->next;
-    }
 
     if (l->labyrinth_matrix[row][col] == '_') {
       *(tmp++) = '\0';
