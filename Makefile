@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -std=c99 -pedantic-errors -Wall -Wextra -O0 -Wno-unused-result -g
+CFLAGS = -std=c99 -pedantic-errors -Wall -Wextra -O0 -Wno-unused-result -fsanitize=address -fno-omit-frame-pointer -g -DDEBUG
 
 .PHONY: snake
 snake: snake.o main.o
@@ -22,6 +22,11 @@ endif
 .PHONY: valgrind
 valgrind: snake
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt bin/snake
+
+.PHONY: documentation
+documentation:
+	/opt/doxygen doxygen_config
+	brave-browser html/index.html
 
 .PHONY: clean
 clean:

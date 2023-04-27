@@ -1,3 +1,13 @@
+/**
+ * @file snake.c
+ * @author Mattia Forlin, Matteo Toffoli
+ * @brief Header's functions implementation.
+ * @date 2023-04-27
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #include "snake.h"
 #include "colors.h"
 
@@ -33,7 +43,7 @@ void labyrinth_init(labyrinth_t *l, int M, int N, snake_t *s) {
   s->next = NULL;
 
   for (int j = 0; j < N; j++) {
-    l->labyrinth_matrix[j] = malloc(sizeof(char) * N);
+    l->labyrinth_matrix[j] = (char*) malloc(sizeof(char) * N);
     scanf(" %[^\n]s", l->labyrinth_matrix[j]);
   }
 }
@@ -50,8 +60,14 @@ void labyrinth_print(labyrinth_t *l, int M, int N, snake_t *s) {
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < M; j++) {
       if (j == s->x_snake_pos && i == s->y_snake_pos) {
-        printf(BOLD_COLOR_WHITE "%c", s->head);
+        snake_t *tail = s;
+        printf(BOLD_COLOR_WHITE "%c", tail->head);
         printf(COLOR_RESET);
+        while (tail->next != NULL) {
+          tail = tail->next;
+          printf(BOLD_COLOR_WHITE "%c", tail->head);
+          printf(COLOR_RESET);
+        }
       } else {
         if (l->labyrinth_matrix[i][j] == '#') {
           printf(BOLD_COLOR_RED "%c", l->labyrinth_matrix[i][j]);
@@ -187,6 +203,15 @@ void labyrinth_run(int M, int N) {
 
     s->y_snake_pos = row;
     s->x_snake_pos = col;
+    snake_t *node = s;
+    while (node->next != NULL) {
+        int tmp_x = node->x_snake_pos, tmp_y = node->y_snake_pos;
+        node->x_snake_pos = row;
+        node->y_snake_pos = col;
+        row = tmp_x;
+        col = tmp_y;
+        node = node->next;
+    }
 
     if (l->labyrinth_matrix[row][col] == '_') {
       *(tmp++) = '\0';

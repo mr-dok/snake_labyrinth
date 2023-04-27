@@ -2,9 +2,9 @@
  * @file colors.h
  * @author Mattia Forlin, Matteo Toffoli
  * @brief colors's header file.
- * @date 2022-08-29
+ * @date 2023-04-27
  *
- * @copyright Copyright (c) 2022
+ * @copyright Copyright (c) 2023
  *
  */
 

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['main_2ec_0',['main.c',['../main_8c.html',1,'']]],
-  ['mainpage_2emd_1',['MAINPAGE.md',['../MAINPAGE_8md.html',1,'']]]
+  ['colors_2eh_0',['colors.h',['../colors_8h.html',1,'']]]
 ];

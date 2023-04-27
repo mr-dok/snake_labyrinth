@@ -2,7 +2,7 @@
  * @file main.c
  * @author Mattia Forlin, Matteo Toffoli
  * @brief Project's main file.
- * @date 2023-02-03
+ * @date 2023-04-27
  *
  * @copyright Copyright (c) 2023
  *

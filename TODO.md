@@ -24,21 +24,21 @@ Ogni ostacolo una volta raccolto scompare dal labirinto.
 
 ## INPUT:
 
-- [ ] leggere il numero di colonne (intero M)
-- [ ] leggere il numero di righe (intero N)
-- [ ] N operazioni di lettura delle righe del piano di gioco
+- [X] leggere il numero di colonne (intero M)
+- [X] leggere il numero di righe (intero N)
+- [X] N operazioni di lettura delle righe del piano di gioco
 
 ## OUTPUT:
 
-- [ ] scrivere SOLO un'unica linea con le mosse del miglior percorso con solo lettere maiuscole ( es. ESSSSSSSEEEEEEEEEENNNNNNNEEEEESSSSEE )  
+- [X] scrivere SOLO un'unica linea con le mosse del miglior percorso con solo lettere maiuscole ( es. ESSSSSSSEEEEEEEEEENNNNNNNEEEEESSSSEE )  
 
 # Due modalità: interattiva e AI.
 
 ## Modalità interattiva:
 
-- [ ] richiesta all'utente qual è la mossa successiva
-- [ ] aggiornamento e visualizzazione del piano di gioco e del punteggio ad ogni mossa
-- [ ] verificare che la mossa sia valida (non attraversi i muri)
+- [X] richiesta all'utente qual è la mossa successiva
+- [X] aggiornamento e visualizzazione del piano di gioco e del punteggio ad ogni mossa
+- [X] verificare che la mossa sia valida (non attraversi i muri)
 
 ## Modalità AI:
 
