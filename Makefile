@@ -1,17 +1,18 @@
 CC = gcc
-CFLAGS = -std=c99 -pedantic-errors -Wall -Wextra -O0 -Wno-unused-result -g -DDEBUG
+CFLAGS_sanitizer = -std=c99 -pedantic-errors -Wall -Wextra -O0 -Wno-unused-result -fsanitize=address -fno-omit-frame-pointer -g -DDEBUG
+CFLAGS_no_sanitizer = -std=c99 -pedantic-errors -Wall -Wextra -O0 -Wno-unused-result -g
 
 .PHONY: snake
 snake: snake.o main.o
-	$(CC) $(CFLAGS) bin/snake.o bin/main.o -o bin/snake
+	$(CC) $(CFLAGS_no_sanitizer) bin/snake.o bin/main.o -o bin/snake
 
 .PHONY: main.o
 main.o: main.c snake.h
-	$(CC) $(CFLAGS) -c main.c -o bin/main.o
+	$(CC) $(CFLAGS_no_sanitizer) -c main.c -o bin/main.o
 
 .PHONY: snake.o
 snake.o: snake.c snake.h create_dir
-	$(CC) $(CFLAGS) -c snake.c -o bin/snake.o
+	$(CC) $(CFLAGS_no_sanitizer) -c snake.c -o bin/snake.o
 
 .PHONY: create_dir
 create_dir:
