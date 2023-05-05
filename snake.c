@@ -30,7 +30,7 @@ struct labyrinth {
   int drill;
 };
 
-void labyrinth_init(labyrinth_t *l, int M, int N, snake_t *s) {
+void labyrinth_init (labyrinth_t *l, int M, int N, snake_t *s) {
   l->M = M;
   l->N = N;
   l->labyrinth_matrix = malloc(sizeof(int[N][M]));
@@ -48,7 +48,7 @@ void labyrinth_init(labyrinth_t *l, int M, int N, snake_t *s) {
   }
 }
 
-void labyrinth_free(labyrinth_t *l, snake_t *s) {
+void labyrinth_free (labyrinth_t *l, snake_t *s) {
   for (int i = 0; i < l->M; ++i)
     free(l->labyrinth_matrix[i]);
   free(l->labyrinth_matrix);
@@ -56,7 +56,7 @@ void labyrinth_free(labyrinth_t *l, snake_t *s) {
   free(s);
 }
 
-void labyrinth_print(labyrinth_t *l, int M, int N, snake_t *s) {
+void labyrinth_print (labyrinth_t *l, int M, int N, snake_t *s) {
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < M; j++) {
       if (j == s->x_snake_pos && i == s->y_snake_pos) {
@@ -109,7 +109,7 @@ void labyrinth_print(labyrinth_t *l, int M, int N, snake_t *s) {
   printf("fine stampa\n");
 }
 
-void find_initial_position(labyrinth_t *l, int *x, int *y) {
+void find_initial_position (labyrinth_t *l, int *x, int *y) {
   int i = 0, j = 0;
   bool found = false;
   while (i < l->N) {
@@ -127,7 +127,62 @@ void find_initial_position(labyrinth_t *l, int *x, int *y) {
   }
 }
 
-void labyrinth_run(int M, int N) {
+void moves_input (char *move, char *moves, int *row, int *col, int *score) {
+  printf(BOLD_COLOR_WHITE "Enter a move (" BOLD_COLOR_GREEN "N" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "S" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "E" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "O" BOLD_COLOR_WHITE "): ");
+  printf(COLOR_RESET);
+  scanf("%c", move);
+  *move = getchar();
+
+  switch (*move) {
+    case 'N':
+      *(moves++) = *move;
+      *row -= 1;
+      *score -= 1;
+    break;
+    case 'O':
+      *(moves++) = *move;
+      *col -= 1;
+      *score -= 1;
+    break;
+    case 'S':
+      *(moves++) = *move;
+      *row += 1;
+      *score -= 1;
+    break;
+    case 'E':
+      *(moves++) = *move;
+      *col += 1;
+      *score -= 1;
+    break;
+    default:
+      printf("Invalid move!\n");
+    break;
+  }
+}
+
+void obstacles_borders_check (labyrinth_t *l, int *row, int *col, int *N, int *M) {
+  if (l->labyrinth_matrix[*row][*col] == '#' && l->drill > 0 && (*row > 0 || *row < *N) && (*col > 0 || *col < *M)) {
+    l->drill -= 1;
+    l->labyrinth_matrix[*row][*col] = ' ';
+  }
+
+  if (*row <= 0 || *row >= *N || *col <= 0 || *col >= *M) {
+    printf("Invalid move!\n");
+    return;
+  }
+  
+  if (l->labyrinth_matrix[*row][*col] == '!') {
+    l->score = 1000 + ((l->score - 1000) / 2);
+    l->labyrinth_matrix[*row][*col] = ' ';
+  }
+
+  if (l->labyrinth_matrix[*row][*col] == 'T') {
+    l->drill += 3;
+    l->labyrinth_matrix[*row][*col] = ' ';
+  }
+}
+
+void labyrinth_interactive_mode_run (int M, int N) {
   labyrinth_t *l = (labyrinth_t *)malloc(sizeof(labyrinth_t));
   snake_t *s = (snake_t *)malloc(sizeof(snake_t));
   char *moves = (char *)malloc(M * N + 1);
@@ -143,72 +198,25 @@ void labyrinth_run(int M, int N) {
     system("clear");
     labyrinth_print(l, l->M, l->N, s);
 
-    printf(BOLD_COLOR_WHITE "Enter a move (" BOLD_COLOR_GREEN "N" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "S" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "E" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "O" BOLD_COLOR_WHITE "): ");
-    printf(COLOR_RESET);
-    scanf("%c", &move);
-    move = getchar();
+    int row = s->y_snake_pos, col = s->x_snake_pos;
 
-    int row = s->y_snake_pos;
-    int col = s->x_snake_pos;
+    moves_input(&move, moves, &row, &col, &l->score);
 
-    switch (move) {
-    case 'N':
-      *(tmp++) = move;
-      row--;
-      l->score--;
-      break;
-    case 'O':
-      *(tmp++) = move;
-      col--;
-      l->score--;
-      break;
-    case 'S':
-      *(tmp++) = move;
-      row++;
-      l->score--;
-      break;
-    case 'E':
-      *(tmp++) = move;
-      col++;
-      l->score--;
-      break;
-    default:
-      printf("Invalid move!\n");
-      break;
-    }
-    if (l->labyrinth_matrix[row][col] == '#' && l->drill > 0 && (row > 0 || row < N) && (col > 0 || col < M)) {
-      l->drill -= 1;
-      l->labyrinth_matrix[row][col] = ' ';
-    }
-
-    if (row <= 0 || row >= N || col <= 0 || col >= M) {
-      printf("Invalid move!\n");
-      return;
-    }
+    obstacles_borders_check(l, &row, &col, &N, &M);
 
     if (l->labyrinth_matrix[row][col] == '$') {
       l->score += 10;
       l->labyrinth_matrix[row][col] = ' ';
       snake_t *tail = s;
-      while (tail->next != NULL)
+      snake_t *new_node = (snake_t *) malloc(sizeof(snake_t));
+      new_node->head = 'o';
+      new_node->next = NULL;
+      if (move == 'E') new_node->x_snake_pos = col - 1;
+      while (new_node->x_snake_pos > tail->head && tail->head != 'O')
         tail = tail->next;
-      tail->next = (snake_t *)malloc(sizeof(snake_t));
-      tail->next->head = 'o';
-      tail->next->x_snake_pos = s->x_snake_pos - 1;
-      if (move == 'N') tail->next->y_snake_pos = s->y_snake_pos - 1;
-      else if (move == 'S') tail->next->y_snake_pos = s->y_snake_pos + 1;
-      else tail->next->y_snake_pos = s->y_snake_pos;
-      tail->next->next = NULL;
-    }
-
-    if (l->labyrinth_matrix[row][col] == '!') {
-      l->score = 1000 + ((l->score - 1000) / 2);
-      l->labyrinth_matrix[row][col] = ' ';
-    }
-
-    if (l->labyrinth_matrix[row][col] == 'T') {
-      l->drill += 3;
-      l->labyrinth_matrix[row][col] = ' ';
+      tail->next = new_node;
+      if (tail->next != NULL)
+        new_node->next = tail->next->next;
     }
 
     s->y_snake_pos = row;
@@ -219,7 +227,7 @@ void labyrinth_run(int M, int N) {
       moves = realloc(moves, tmp - moves);
       system("clear");
       printf(COLOR_GREEN_HIGH_BACKGROUND BOLD_COLOR_BLACK "%s\n", moves);
-      win = true;
+      win = true; 
     }
   }
   labyrinth_free(l, s);

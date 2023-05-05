@@ -22,14 +22,6 @@ typedef struct snake snake_t;
 typedef struct labyrinth labyrinth_t;
 
 /**
- * @brief Main function for interactive mode.
- *
- * @param M Number of labyrinth columns.
- * @param N Number of labyrinth rows.
- */
-void labyrinth_run (int M, int N);
-
-/**
  * @brief Function to initialize the data structures.
  *
  * @param l Data structure of labyrinth type.
@@ -38,6 +30,14 @@ void labyrinth_run (int M, int N);
  * @param s Data structure of snake type.
  */
 void labyrinth_init (labyrinth_t *l, int M, int N, snake_t *s);
+
+/**
+ * @brief Function to free the occupied memory.
+ *
+ * @param l Data structure of labyrinth type.
+ * @param s Data structure of snake type.
+ */
+void labyrinth_free (labyrinth_t *l, snake_t *s);
 
 /**
  * @brief Function to print the labyrinth
@@ -50,14 +50,6 @@ void labyrinth_init (labyrinth_t *l, int M, int N, snake_t *s);
 void labyrinth_print (labyrinth_t *l, int M, int N, snake_t *s);
 
 /**
- * @brief Function to free the occupied memory.
- *
- * @param l Data structure of labyrinth type.
- * @param s Data structure of snake type.
- */
-void labyrinth_free (labyrinth_t *l, snake_t *s);
-
-/**
  * @brief Function to find the initial position of the snake.
  *
  * @param l Data structure of labyrinth type.
@@ -65,5 +57,17 @@ void labyrinth_free (labyrinth_t *l, snake_t *s);
  * @param y Pointer variable to the y axis of the labyrinth.
  */
 void find_initial_position (labyrinth_t *l, int *x, int *y);
+
+void moves_input (char *move, char *moves, int *row, int *col, int *score);
+
+void obstacles_borders_check (labyrinth_t *l, int *row, int *col, int *N, int *M);
+
+/**
+ * @brief Main function for interactive mode.
+ *
+ * @param M Number of labyrinth columns.
+ * @param N Number of labyrinth rows.
+ */
+void labyrinth_interactive_mode_run (int M, int N);
 
 #endif

@@ -25,6 +25,6 @@ int main (void) {
   scanf("%d", &N);
   getchar();
   
-  labyrinth_run(M, N);
+  labyrinth_interactive_mode_run(M, N);
   return 0;
 }
