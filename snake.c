@@ -132,25 +132,26 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score) {
   printf(COLOR_RESET);
   scanf("%c", move);
   *move = getchar();
+  char *tmp = moves;
 
   switch (*move) {
     case 'N':
-      *(moves++) = *move;
+      *tmp = *move;
       *row -= 1;
       *score -= 1;
     break;
     case 'O':
-      *(moves++) = *move;
+      *tmp = *move;
       *col -= 1;
       *score -= 1;
     break;
     case 'S':
-      *(moves++) = *move;
+      *tmp = *move;
       *row += 1;
       *score -= 1;
     break;
     case 'E':
-      *(moves++) = *move;
+      *tmp = *move;
       *col += 1;
       *score -= 1;
     break;
@@ -183,10 +184,10 @@ void obstacles_borders_check (labyrinth_t *l, int *row, int *col, int *N, int *M
 }
 
 void labyrinth_interactive_mode_run (int M, int N) {
-  labyrinth_t *l = (labyrinth_t *)malloc(sizeof(labyrinth_t));
-  snake_t *s = (snake_t *)malloc(sizeof(snake_t));
-  char *moves = (char *)malloc(M * N + 1);
-  char *tmp = moves;
+  labyrinth_t *l = (labyrinth_t *) malloc(sizeof(labyrinth_t));
+  snake_t *s = (snake_t *) malloc(sizeof(snake_t));
+  char *moves = (char *) malloc(M * N + 1);
+  char *tmp = moves; 
   labyrinth_init(l, M, N, s);
 
   find_initial_position(l, &s->x_snake_pos, &s->y_snake_pos);
@@ -200,7 +201,7 @@ void labyrinth_interactive_mode_run (int M, int N) {
 
     int row = s->y_snake_pos, col = s->x_snake_pos;
 
-    moves_input(&move, moves, &row, &col, &l->score);
+    moves_input(&move, tmp++, &row, &col, &l->score);
 
     obstacles_borders_check(l, &row, &col, &N, &M);
 
@@ -212,7 +213,7 @@ void labyrinth_interactive_mode_run (int M, int N) {
       new_node->head = 'o';
       new_node->next = NULL;
       if (move == 'E') new_node->x_snake_pos = col - 1;
-      while (new_node->x_snake_pos > tail->head && tail->head != 'O')
+      while (new_node->x_snake_pos > tail->head || tail->head != 'O')
         tail = tail->next;
       tail->next = new_node;
       if (tail->next != NULL)
