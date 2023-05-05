@@ -58,7 +58,7 @@ void labyrinth_print (labyrinth_t *l, int M, int N, snake_t *s);
  */
 void find_initial_position (labyrinth_t *l, int *x, int *y);
 
-void moves_input (char *move, char *moves, int *row, int *col, int *score);
+void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *s);
 
 void obstacles_borders_check (labyrinth_t *l, int *row, int *col, int *N, int *M);
 
