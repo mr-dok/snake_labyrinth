@@ -58,7 +58,28 @@ void labyrinth_print (labyrinth_t *l, int M, int N, snake_t *s);
  */
 void find_initial_position (labyrinth_t *l, int *x, int *y);
 
+/**
+ * @brief Function to receive input from the user and change the position of the snake. 
+ *
+ * @param move Pointer variable to save the current move entered.
+ * @param moves Char array to save the total number of moves.
+ * @param row Pointer variable to the row of the labyrinth.
+ * @param col Pointer variable to the column of the labyrinth.
+ * @param score Variable for storing the game's score.
+ * @param s Data structure of snake type.
+ */
+
 void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *s);
+
+/**
+ * @brief Function to receive input from the user and change the position of the snake. 
+ *
+ * @param l Data structure of labyrinth type.
+ * @param row Pointer variable to the row of the labyrinth.
+ * @param col Pointer variable to the column of the labyrinth.
+ * @param N Number of labyrinth rows.
+ * @param M Number of labyrinth columns.
+ */
 
 void obstacles_borders_check (labyrinth_t *l, int *row, int *col, int *N, int *M);
 
