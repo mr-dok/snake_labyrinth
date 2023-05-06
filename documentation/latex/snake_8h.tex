@@ -8,16 +8,20 @@ Project\textquotesingle{}s header file.
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{snake_8h_a986a79d5a48f70da24c7135d87b53046}{labyrinth\+\_\+run}} (int M, int N)
-\begin{DoxyCompactList}\small\item\em Main function for interactive mode. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{snake_8h_a2d83b8480d86f05d028360c36f7a9335}{labyrinth\+\_\+init}} (labyrinth\+\_\+t $\ast$l, int M, int N, snake\+\_\+t $\ast$s)
 \begin{DoxyCompactList}\small\item\em Function to initialize the data structures. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{snake_8h_af4dd7c26af7f07c5ac92755a599d7c80}{labyrinth\+\_\+print}} (labyrinth\+\_\+t $\ast$l, int M, int N, snake\+\_\+t $\ast$s)
-\begin{DoxyCompactList}\small\item\em Function to print the labyrinth. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{snake_8h_acd65deeb26f89dd33e84b31afe2e9be4}{labyrinth\+\_\+free}} (labyrinth\+\_\+t $\ast$l, snake\+\_\+t $\ast$s)
 \begin{DoxyCompactList}\small\item\em Function to free the occupied memory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{snake_8h_af4dd7c26af7f07c5ac92755a599d7c80}{labyrinth\+\_\+print}} (labyrinth\+\_\+t $\ast$l, int M, int N, snake\+\_\+t $\ast$s)
+\begin{DoxyCompactList}\small\item\em Function to print the labyrinth. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{snake_8h_a915c7e724f85b799ab526287b0b18577}{find\+\_\+initial\+\_\+position}} (labyrinth\+\_\+t $\ast$l, int $\ast$x, int $\ast$y)
-\begin{DoxyCompactList}\small\item\em Function to find the initial position of the snake. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Function to find the initial position of the snake. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{snake_8h_aa5c753bdc622a5681bd88fda716fd817}{moves\+\_\+input}} (char $\ast$move, char $\ast$moves, int $\ast$row, int $\ast$col, int $\ast$score, snake\+\_\+t $\ast$s)
+\begin{DoxyCompactList}\small\item\em Function to receive input from the user and change the position of the snake. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{snake_8h_acfc9c2a13f37aa63218fcd9c6783f631}{obstacles\+\_\+borders\+\_\+check}} (labyrinth\+\_\+t $\ast$l, int $\ast$row, int $\ast$col, int $\ast$N, int $\ast$M)
+\begin{DoxyCompactList}\small\item\em Function to receive input from the user and change the position of the snake. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{snake_8h_a8f15eb264cdcabee8d3c7d7146ceb1f7}{labyrinth\+\_\+interactive\+\_\+mode\+\_\+run}} (int M, int N)
+\begin{DoxyCompactList}\small\item\em Main function for interactive mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -92,6 +96,23 @@ Function to initialize the data structures.
 {\em s} & Data structure of snake type. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{snake_8h_a8f15eb264cdcabee8d3c7d7146ceb1f7}\label{snake_8h_a8f15eb264cdcabee8d3c7d7146ceb1f7}} 
+\index{snake.h@{snake.h}!labyrinth\_interactive\_mode\_run@{labyrinth\_interactive\_mode\_run}}
+\index{labyrinth\_interactive\_mode\_run@{labyrinth\_interactive\_mode\_run}!snake.h@{snake.h}}
+\doxysubsubsection{\texorpdfstring{labyrinth\_interactive\_mode\_run()}{labyrinth\_interactive\_mode\_run()}}
+{\footnotesize\ttfamily void labyrinth\+\_\+interactive\+\_\+mode\+\_\+run (\begin{DoxyParamCaption}\item[{int}]{M,  }\item[{int}]{N }\end{DoxyParamCaption})}
+
+
+
+Main function for interactive mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em M} & Number of labyrinth columns. \\
+\hline
+{\em N} & Number of labyrinth rows. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{snake_8h_af4dd7c26af7f07c5ac92755a599d7c80}\label{snake_8h_af4dd7c26af7f07c5ac92755a599d7c80}} 
 \index{snake.h@{snake.h}!labyrinth\_print@{labyrinth\_print}}
 \index{labyrinth\_print@{labyrinth\_print}!snake.h@{snake.h}}
@@ -113,20 +134,51 @@ Function to print the labyrinth.
 {\em s} & Data structure of snake type. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{snake_8h_a986a79d5a48f70da24c7135d87b53046}\label{snake_8h_a986a79d5a48f70da24c7135d87b53046}} 
-\index{snake.h@{snake.h}!labyrinth\_run@{labyrinth\_run}}
-\index{labyrinth\_run@{labyrinth\_run}!snake.h@{snake.h}}
-\doxysubsubsection{\texorpdfstring{labyrinth\_run()}{labyrinth\_run()}}
-{\footnotesize\ttfamily void labyrinth\+\_\+run (\begin{DoxyParamCaption}\item[{int}]{M,  }\item[{int}]{N }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{snake_8h_aa5c753bdc622a5681bd88fda716fd817}\label{snake_8h_aa5c753bdc622a5681bd88fda716fd817}} 
+\index{snake.h@{snake.h}!moves\_input@{moves\_input}}
+\index{moves\_input@{moves\_input}!snake.h@{snake.h}}
+\doxysubsubsection{\texorpdfstring{moves\_input()}{moves\_input()}}
+{\footnotesize\ttfamily void moves\+\_\+input (\begin{DoxyParamCaption}\item[{char $\ast$}]{move,  }\item[{char $\ast$}]{moves,  }\item[{int $\ast$}]{row,  }\item[{int $\ast$}]{col,  }\item[{int $\ast$}]{score,  }\item[{snake\+\_\+t $\ast$}]{s }\end{DoxyParamCaption})}
 
 
 
-Main function for interactive mode. 
+Function to receive input from the user and change the position of the snake. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em M} & Number of labyrinth columns. \\
+{\em move} & Pointer variable to save the current move entered. \\
+\hline
+{\em moves} & Char array to save the total number of moves. \\
+\hline
+{\em row} & Pointer variable to the row of the labyrinth. \\
+\hline
+{\em col} & Pointer variable to the column of the labyrinth. \\
+\hline
+{\em score} & Variable for storing the game\textquotesingle{}s score. \\
+\hline
+{\em s} & Data structure of snake type. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{snake_8h_acfc9c2a13f37aa63218fcd9c6783f631}\label{snake_8h_acfc9c2a13f37aa63218fcd9c6783f631}} 
+\index{snake.h@{snake.h}!obstacles\_borders\_check@{obstacles\_borders\_check}}
+\index{obstacles\_borders\_check@{obstacles\_borders\_check}!snake.h@{snake.h}}
+\doxysubsubsection{\texorpdfstring{obstacles\_borders\_check()}{obstacles\_borders\_check()}}
+{\footnotesize\ttfamily void obstacles\+\_\+borders\+\_\+check (\begin{DoxyParamCaption}\item[{labyrinth\+\_\+t $\ast$}]{l,  }\item[{int $\ast$}]{row,  }\item[{int $\ast$}]{col,  }\item[{int $\ast$}]{N,  }\item[{int $\ast$}]{M }\end{DoxyParamCaption})}
+
+
+
+Function to receive input from the user and change the position of the snake. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & Data structure of labyrinth type. \\
+\hline
+{\em row} & Pointer variable to the row of the labyrinth. \\
+\hline
+{\em col} & Pointer variable to the column of the labyrinth. \\
 \hline
 {\em N} & Number of labyrinth rows. \\
+\hline
+{\em M} & Number of labyrinth columns. \\
 \hline
 \end{DoxyParams}

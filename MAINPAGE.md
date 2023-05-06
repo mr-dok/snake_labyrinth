@@ -1,6 +1,6 @@
 ## Main page
 
-![snake_labyrinth](../../snake_labyrinth/logo.png)
+![snake_labyrinth](../../../snake_labyrinth/logo.png)
 
 ### Description
 
