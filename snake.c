@@ -168,6 +168,21 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score, snake
     break;
   }
 
+ prev = head->next;
+  while (prev != NULL) {
+    if (head->x_snake_pos == prev->x_snake_pos && head->y_snake_pos == prev->y_snake_pos) {
+      // elimino parte compresa tra incontro e coda
+      while (prev->next != NULL) {
+        snake_t *temp = prev->next;
+        prev->next = temp->next;
+        free(temp);
+      }
+      break;
+    }
+    prev = prev->next;
+  }
+
+  //aggiorno parti del corpo
   prev = head->next;
   while (prev != NULL) {
     int temp_x = prev->x_snake_pos;
@@ -176,21 +191,6 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score, snake
     prev->y_snake_pos = old_y;
     old_x = temp_x;
     old_y = temp_y;
-
-    if (head->x_snake_pos == prev->x_snake_pos && head->y_snake_pos == prev->y_snake_pos) {
-      if (prev->next == NULL) {
-        free(prev);
-        head->next = NULL;
-      } else {
-        snake_t *tail = prev->next;
-        while (tail->next != NULL) {
-          tail = tail->next;
-        }
-        free(prev);
-        head->next = tail;
-      }
-    }
-
     prev = prev->next;
   }
 }
