@@ -213,6 +213,19 @@ void add_tail (snake_t *head) {
   tail->next->next = NULL;
 }
 
+void check_dead_ends (labyrinth_t *l, snake_t *s) {
+  int row = s->y_snake_pos, col = s->x_snake_pos;
+  if (l->labyrinth_matrix[row-1][col] == '#' && l->labyrinth_matrix[row][col+1] == '#' && l->labyrinth_matrix[row+1][col] == '#' && s->next != NULL) {
+    s->next->next = NULL;
+    int new_head_row = s->next->y_snake_pos;
+    int new_head_col = s->next->x_snake_pos;
+    s->next->y_snake_pos = row;
+    s->next->x_snake_pos = col;
+    s->y_snake_pos = new_head_row;
+    s->x_snake_pos = new_head_col;
+  }
+}
+
 void labyrinth_interactive_mode_run (int M, int N) {
   labyrinth_t *l = (labyrinth_t *) malloc(sizeof(labyrinth_t));
   snake_t *s = (snake_t *) malloc(sizeof(snake_t));
@@ -232,6 +245,8 @@ void labyrinth_interactive_mode_run (int M, int N) {
     int row = s->y_snake_pos, col = s->x_snake_pos;
 
     moves_input(&move, tmp++, &row, &col, &l->score, s);
+    
+    check_dead_ends(l, s);
 
     obstacles_borders_check(l, &row, &col, &N, &M);
 
