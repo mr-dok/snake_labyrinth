@@ -60,14 +60,14 @@ void labyrinth_print (labyrinth_t *l, int M, int N, snake_t *s) {
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < M; j++) {
       if (j == s->x_snake_pos && i == s->y_snake_pos) {
-        printf(BOLD_COLOR_WHITE "%c", s->head);
+        printf(BOLD_COLOR_WHITE "%c ", s->head);
         printf(COLOR_RESET);
       } else {
         int is_tail = 0;
         snake_t *tail = s->next;
         while (tail != NULL) {
           if (i == tail->y_snake_pos && j == tail->x_snake_pos) {
-            printf(BOLD_COLOR_WHITE "%c", tail->head);
+            printf(BOLD_COLOR_WHITE "%c ", tail->head);
             is_tail = 1;
             break;
           }
@@ -75,22 +75,22 @@ void labyrinth_print (labyrinth_t *l, int M, int N, snake_t *s) {
         }
         if (!is_tail) {
           if (l->labyrinth_matrix[i][j] == '#') {
-            printf(BOLD_COLOR_RED "%c", l->labyrinth_matrix[i][j]);
+            printf(BOLD_COLOR_RED "%c ", l->labyrinth_matrix[i][j]);
             printf(COLOR_RESET);
           } else {
             if (l->labyrinth_matrix[i][j] == '$') {
-              printf(BOLD_COLOR_PURPLE "%c", l->labyrinth_matrix[i][j]);
+              printf(BOLD_COLOR_PURPLE "%c ", l->labyrinth_matrix[i][j]);
               printf(COLOR_RESET);
             } else {
               if (l->labyrinth_matrix[i][j] == 'T') {
-                printf(BOLD_COLOR_BLUE "%c", l->labyrinth_matrix[i][j]);
+                printf(BOLD_COLOR_BLUE "%c ", l->labyrinth_matrix[i][j]);
                 printf(COLOR_RESET);
               } else {
                 if (l->labyrinth_matrix[i][j] == '!') {
-                  printf(BOLD_COLOR_GREEN "%c", l->labyrinth_matrix[i][j]);
+                  printf(BOLD_COLOR_GREEN "%c ", l->labyrinth_matrix[i][j]);
                   printf(COLOR_RESET);
                 } else {
-                  printf("%c", l->labyrinth_matrix[i][j]);
+                  printf("%c ", l->labyrinth_matrix[i][j]);
                 }
               }
             }
@@ -170,12 +170,27 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score, snake
 
   prev = head->next;
   while (prev != NULL) {
-    int aux_x = prev->x_snake_pos;
-    int aux_y = prev->y_snake_pos;
+    int temp_x = prev->x_snake_pos;
+    int temp_y = prev->y_snake_pos;
     prev->x_snake_pos = old_x;
     prev->y_snake_pos = old_y;
-    old_x = aux_x;
-    old_y = aux_y;
+    old_x = temp_x;
+    old_y = temp_y;
+
+    if (head->x_snake_pos == prev->x_snake_pos && head->y_snake_pos == prev->y_snake_pos) {
+      if (prev->next == NULL) {
+        free(prev);
+        head->next = NULL;
+      } else {
+        snake_t *tail = prev->next;
+        while (tail->next != NULL) {
+          tail = tail->next;
+        }
+        free(prev);
+        head->next = tail;
+      }
+    }
+
     prev = prev->next;
   }
 }
