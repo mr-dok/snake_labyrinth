@@ -124,7 +124,7 @@ void find_initial_position (labyrinth_t *l, int *x, int *y) {
   }
 }
 
-void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *head) {
+void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *head, labyrinth_t *l) {
   printf(BOLD_COLOR_WHITE "Enter a move (" BOLD_COLOR_GREEN "N" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "S" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "E" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "O" BOLD_COLOR_WHITE "): ");
   printf(COLOR_RESET);
   
@@ -135,7 +135,8 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score, snake
   
   int old_x = head->x_snake_pos;
   int old_y = head->y_snake_pos;
-
+  int count = 0;
+  
   snake_t *prev = head;
 
   switch (*move) {
@@ -168,11 +169,12 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score, snake
     break;
   }
 
- prev = head->next;
+  prev = head->next;
   while (prev != NULL) {
     if (head->x_snake_pos == prev->x_snake_pos && head->y_snake_pos == prev->y_snake_pos) {
       // elimino parte compresa tra incontro e coda
       while (prev->next != NULL) {
+        count++;
         snake_t *temp = prev->next;
         prev->next = temp->next;
         free(temp);
@@ -181,6 +183,8 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score, snake
     }
     prev = prev->next;
   }
+  
+  l->score -= count * 10;
 
   //aggiorno parti del corpo
   prev = head->next;
@@ -259,7 +263,7 @@ void labyrinth_interactive_mode_run (int M, int N) {
 
     int row = s->y_snake_pos, col = s->x_snake_pos;
 
-    moves_input(&move, tmp++, &row, &col, &l->score, s);
+    moves_input(&move, tmp++, &row, &col, &l->score, s, l);
     
     check_dead_ends(l, s);
 

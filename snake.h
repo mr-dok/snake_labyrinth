@@ -69,7 +69,7 @@ void find_initial_position (labyrinth_t *l, int *x, int *y);
  * @param s Data structure of snake type.
  */
 
-void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *s);
+void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *s, labyrinth_t *l);
 
 /**
  * @brief Function to receive input from the user and change the position of the snake. 
