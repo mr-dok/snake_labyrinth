@@ -234,7 +234,7 @@ void add_tail (snake_t *head) {
 
 void check_dead_ends (labyrinth_t *l, snake_t *s) {
   int row = s->y_snake_pos, col = s->x_snake_pos;
-  if (l->labyrinth_matrix[row-1][col] == '#' && l->labyrinth_matrix[row][col+1] == '#' && l->labyrinth_matrix[row+1][col] == '#' && s->next != NULL) {
+  if(((l->labyrinth_matrix[s->y_snake_pos +1][s->x_snake_pos] == '#' && l->labyrinth_matrix[s->y_snake_pos][s->x_snake_pos-1] == '#'  && l->labyrinth_matrix[s->y_snake_pos][s->x_snake_pos+1] == '#')||(l->labyrinth_matrix[s->y_snake_pos -1][s->x_snake_pos] == '#' && l->labyrinth_matrix[s->y_snake_pos][s->x_snake_pos-1] == '#'  && l->labyrinth_matrix[s->y_snake_pos][s->x_snake_pos+1] == '#')||(l->labyrinth_matrix[s->y_snake_pos +1][s->x_snake_pos] == '#' && l->labyrinth_matrix[s->y_snake_pos-1][s->x_snake_pos] == '#'  && l->labyrinth_matrix[s->y_snake_pos][s->x_snake_pos+1] == '#')||(l->labyrinth_matrix[s->y_snake_pos +1][s->x_snake_pos] == '#' && l->labyrinth_matrix[s->y_snake_pos-1][s->x_snake_pos] == '#'  && l->labyrinth_matrix[s->y_snake_pos][s->x_snake_pos-1] == '#'))&& s->next!=NULL) {
     s->next->next = NULL;
     int new_head_row = s->next->y_snake_pos;
     int new_head_col = s->next->x_snake_pos;
