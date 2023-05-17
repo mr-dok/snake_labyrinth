@@ -81,7 +81,7 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score, snake
  * @param M Number of labyrinth columns.
  */
 
-void obstacles_borders_check (labyrinth_t *l, int *row, int *col, int *N, int *M);
+void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col, int *N, int *M);
 
 /**
  * @brief Main function for interactive mode.

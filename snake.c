@@ -199,20 +199,48 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score, snake
   }
 }
 
-void obstacles_borders_check (labyrinth_t *l, int *row, int *col, int *N, int *M) {
-  if (l->labyrinth_matrix[*row][*col] == '#' && l->drill > 0 && (*row > 0 || *row < *N) && (*col > 0 || *col < *M)) {
-    l->drill -= 1;
-    l->labyrinth_matrix[*row][*col] = ' ';
+void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col, int *N, int *M) {
+  if (*row < 0 || *row == l->N || *col < 0 || *col == l->M) {
+    printf("Invalid move!\n");
+    exit(1);
   }
 
-  if (*row <= 0 || *row >= *N || *col <= 0 || *col >= *M) {
-    printf("Invalid move!\n");
-    return;
+  if (l->labyrinth_matrix[*row][*col] == '#') {
+    if (l->drill <= 0) {
+      printf("Game over! You hit a wall.\n");
+      exit(1);
+    } else {
+      l->drill -= 1;
+    }
   }
   
   if (l->labyrinth_matrix[*row][*col] == '!') {
-    l->score = 1000 + ((l->score - 1000) / 2);
+    //l->score = 1000 + ((l->score - 1000) / 2);
     l->labyrinth_matrix[*row][*col] = ' ';
+
+    int length = 0;
+    snake_t* temp = head;
+    while (temp != NULL) {
+      length++;
+      temp = temp->next;
+    }
+
+    // Dimezza la lunghezza
+    length /= 2;
+    l->score -= length * 10;
+
+    // Rimuovi gli elementi dalla lista
+    if (length > 0) {
+      snake_t* temp = head;
+      for (int i = 0; i < length-1; i++) {
+        temp = temp->next;
+      }
+      while (temp->next != NULL) {
+        snake_t* to_remove = temp->next;
+        temp->next = to_remove->next;
+        free(to_remove);
+      }
+    }
   }
 
   if (l->labyrinth_matrix[*row][*col] == 'T') {
@@ -232,16 +260,19 @@ void add_tail (snake_t *head) {
   tail->next->next = NULL;
 }
 
-void check_dead_ends (labyrinth_t *l, snake_t *s) {
-  int row = s->y_snake_pos, col = s->x_snake_pos;
-  if(((l->labyrinth_matrix[s->y_snake_pos +1][s->x_snake_pos] == '#' && l->labyrinth_matrix[s->y_snake_pos][s->x_snake_pos-1] == '#'  && l->labyrinth_matrix[s->y_snake_pos][s->x_snake_pos+1] == '#')||(l->labyrinth_matrix[s->y_snake_pos -1][s->x_snake_pos] == '#' && l->labyrinth_matrix[s->y_snake_pos][s->x_snake_pos-1] == '#'  && l->labyrinth_matrix[s->y_snake_pos][s->x_snake_pos+1] == '#')||(l->labyrinth_matrix[s->y_snake_pos +1][s->x_snake_pos] == '#' && l->labyrinth_matrix[s->y_snake_pos-1][s->x_snake_pos] == '#'  && l->labyrinth_matrix[s->y_snake_pos][s->x_snake_pos+1] == '#')||(l->labyrinth_matrix[s->y_snake_pos +1][s->x_snake_pos] == '#' && l->labyrinth_matrix[s->y_snake_pos-1][s->x_snake_pos] == '#'  && l->labyrinth_matrix[s->y_snake_pos][s->x_snake_pos-1] == '#'))&& s->next!=NULL) {
-    s->next->next = NULL;
-    int new_head_row = s->next->y_snake_pos;
-    int new_head_col = s->next->x_snake_pos;
-    s->next->y_snake_pos = row;
-    s->next->x_snake_pos = col;
-    s->y_snake_pos = new_head_row;
-    s->x_snake_pos = new_head_col;
+void check_dead_ends (labyrinth_t *l, snake_t *head) {
+  int row = head->y_snake_pos, col = head->x_snake_pos;
+  if (l->labyrinth_matrix[head->y_snake_pos +1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
+
+  }
+  if (l->labyrinth_matrix[head->y_snake_pos -1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
+
+  }
+  if (l->labyrinth_matrix[head->y_snake_pos +1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos-1][head->x_snake_pos] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
+    
+  }
+  if (l->labyrinth_matrix[head->y_snake_pos +1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos-1][head->x_snake_pos] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#') {
+    
   }
 }
 
@@ -267,7 +298,7 @@ void labyrinth_interactive_mode_run (int M, int N) {
     
     check_dead_ends(l, s);
 
-    obstacles_borders_check(l, &row, &col, &N, &M);
+    obstacles_borders_check(l, s, &row, &col, &N, &M);
 
     if (l->labyrinth_matrix[row][col] == '$') {
       l->score += 10;
