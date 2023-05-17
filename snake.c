@@ -215,7 +215,6 @@ void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col,
   }
   
   if (l->labyrinth_matrix[*row][*col] == '!') {
-    //l->score = 1000 + ((l->score - 1000) / 2);
     l->labyrinth_matrix[*row][*col] = ' ';
 
     int length = 0;
@@ -227,7 +226,7 @@ void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col,
 
     // Dimezza la lunghezza
     length /= 2;
-    l->score -= length * 10;
+    l->score = 1000 + ((l->score - 1000) / 2);
 
     // Rimuovi gli elementi dalla lista
     if (length > 0) {
