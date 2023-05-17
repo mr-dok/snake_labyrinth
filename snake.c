@@ -263,16 +263,44 @@ void add_tail (snake_t *head) {
 void check_dead_ends (labyrinth_t *l, snake_t *head) {
   int row = head->y_snake_pos, col = head->x_snake_pos;
   if (l->labyrinth_matrix[head->y_snake_pos +1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
-
+    head->next->next = NULL;
+    int new_head_row = head->next->y_snake_pos;
+    int new_head_col = head->next->x_snake_pos;
+    head->next->y_snake_pos = row;
+    head->next->x_snake_pos = col;
+    head->y_snake_pos = new_head_row;
+    head->x_snake_pos = new_head_col;
+    return;
   }
   if (l->labyrinth_matrix[head->y_snake_pos -1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
-
+    head->next->next = NULL;
+    int new_head_row = head->next->y_snake_pos;
+    int new_head_col = head->next->x_snake_pos;
+    head->next->y_snake_pos = row;
+    head->next->x_snake_pos = col;
+    head->y_snake_pos = new_head_row;
+    head->x_snake_pos = new_head_col;
+    return;
   }
   if (l->labyrinth_matrix[head->y_snake_pos +1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos-1][head->x_snake_pos] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
-    
+    head->next->next = NULL;
+    int new_head_row = head->next->y_snake_pos;
+    int new_head_col = head->next->x_snake_pos;
+    head->next->y_snake_pos = row;
+    head->next->x_snake_pos = col;
+    head->y_snake_pos = new_head_row;
+    head->x_snake_pos = new_head_col;
+    return;
   }
   if (l->labyrinth_matrix[head->y_snake_pos +1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos-1][head->x_snake_pos] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#') {
-    
+    head->next->next = NULL;
+    int new_head_row = head->next->y_snake_pos;
+    int new_head_col = head->next->x_snake_pos;
+    head->next->y_snake_pos = row;
+    head->next->x_snake_pos = col;
+    head->y_snake_pos = new_head_row;
+    head->x_snake_pos = new_head_col;
+    return;
   }
 }
 
