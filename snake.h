@@ -75,13 +75,12 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score, snake
  * @brief Function to receive input from the user and change the position of the snake. 
  *
  * @param l Data structure of labyrinth type.
+ * @param head Data structure of snake type.
  * @param row Pointer variable to the row of the labyrinth.
  * @param col Pointer variable to the column of the labyrinth.
- * @param N Number of labyrinth rows.
- * @param M Number of labyrinth columns.
  */
 
-void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col, int *N, int *M);
+void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col);
 
 /**
  * @brief Main function for interactive mode.

@@ -128,7 +128,13 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score, snake
   printf(BOLD_COLOR_WHITE "Enter a move (" BOLD_COLOR_GREEN "N" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "S" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "E" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "O" BOLD_COLOR_WHITE "): ");
   printf(COLOR_RESET);
   
-  scanf("%c", move);
+  while (scanf("%c ", move) != 1) {
+    int c;
+    while((c=getchar()) != '\n' && c != EOF); //Clear the stdin
+    printf("Invalid input. Try again\n");
+    printf(BOLD_COLOR_WHITE "Enter a move (" BOLD_COLOR_GREEN "N" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "S" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "E" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "O" BOLD_COLOR_WHITE "): ");
+    printf(COLOR_RESET);
+  }
   *move = getchar();
   
   char *tmp = moves;
@@ -199,7 +205,7 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score, snake
   }
 }
 
-void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col, int *N, int *M) {
+void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col) {
   if (*row < 0 || *row == l->N || *col < 0 || *col == l->M) {
     printf("Invalid move!\n");
     exit(1);
@@ -325,7 +331,7 @@ void labyrinth_interactive_mode_run (int M, int N) {
     
     check_dead_ends(l, s);
 
-    obstacles_borders_check(l, s, &row, &col, &N, &M);
+    obstacles_borders_check(l, s, &row, &col);
 
     if (l->labyrinth_matrix[row][col] == '$') {
       l->score += 10;
