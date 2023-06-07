@@ -217,6 +217,7 @@ void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col)
       exit(1);
     } else {
       l->drill -= 1;
+      l->labyrinth_matrix[*row][*col] = ' ';
     }
   }
   
