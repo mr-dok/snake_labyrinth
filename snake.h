@@ -90,12 +90,4 @@ void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col)
  */
 void labyrinth_interactive_mode_run (int M, int N);
 
-/**
- * @brief Main function for AI mode.
- *
- * @param M Number of labyrinth columns.
- * @param N Number of labyrinth rows.
- */
-void labyrinth_AI_mode_run (int M, int N);
-
 #endif

@@ -353,7 +353,3 @@ void labyrinth_interactive_mode_run (int M, int N) {
   labyrinth_free(l, s);
   exit(0);
 }
-
-void labyrinth_AI_mode_run(int M, int N) {
-  exit(0);
-}
