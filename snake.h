@@ -10,6 +10,7 @@
 
 #ifndef snake_h 
 #define snake_h
+#include <stdbool.h>
 
 /**
  * @brief Data structure to represent the snake.
@@ -69,10 +70,10 @@ void find_initial_position (labyrinth_t *l, int *x, int *y);
  * @param s Data structure of snake type.
  */
 
-void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *s, labyrinth_t *l);
+void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *s, labyrinth_t *l, int mode);
 
 /**
- * @brief Function to receive input from the user and change the position of the snake. 
+ * @brief Function to control obstacles (walls and invalid positions) and objects to collect. 
  *
  * @param l Data structure of labyrinth type.
  * @param head Data structure of snake type.

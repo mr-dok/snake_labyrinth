@@ -1,4 +1,6 @@
 bin/*
 .vscode/*
 *.txt
+!CMakeLists.txt
 TODO.md
+build/*

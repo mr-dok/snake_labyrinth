@@ -27,8 +27,9 @@ valgrind: snake
 .PHONY: documentation
 documentation:
 	/opt/doxygen doxygen_config
-	brave-browser html/index.html
 
 .PHONY: clean
 clean:
 	$(RM) bin/*
+	find . -name "*.txt" ! -name "CMakeLists.txt" -type f -delete
+	$(RM) massif.out.*

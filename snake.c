@@ -14,6 +14,8 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <unistd.h>
 
 struct snake {
   char head;
@@ -33,7 +35,26 @@ struct labyrinth {
 void labyrinth_init (labyrinth_t *l, int M, int N, snake_t *s) {
   l->M = M;
   l->N = N;
-  l->labyrinth_matrix = malloc(sizeof(int[N][M]));
+  l->labyrinth_matrix = (char **) malloc(sizeof(char *) * N);
+  
+  if (l->labyrinth_matrix == NULL) {
+    printf("error while allocating labyrinth_matrix\n");
+    return;
+  }
+
+  for (int j = 0; j < N; j++) {
+    l->labyrinth_matrix[j] = (char *) malloc(sizeof(char) * M + 1);
+    if (l->labyrinth_matrix[j] == NULL) {
+      printf("error while allocating row %d of labyrinth_matrix\n", j);
+      for (int k = 0; k < j; k++) {
+        free(l->labyrinth_matrix[k]);
+      }
+      free(l->labyrinth_matrix);
+      return;
+    }
+    scanf(" %[^\n]s", l->labyrinth_matrix[j]);
+  }
+
   l->score = 1000;
   l->drill = 0;
 
@@ -41,15 +62,10 @@ void labyrinth_init (labyrinth_t *l, int M, int N, snake_t *s) {
   s->x_snake_pos = 0;
   s->y_snake_pos = 0;
   s->next = NULL;
-
-  for (int j = 0; j < N; j++) {
-    l->labyrinth_matrix[j] = (char *) malloc(sizeof(char) * M);
-    scanf(" %[^\n]s", l->labyrinth_matrix[j]);
-  }
 }
 
 void labyrinth_free (labyrinth_t *l, snake_t *s) {
-  for (int i = 0; i < l->M; ++i)
+  for (int i = 0; i < l->N; ++i)
     free(l->labyrinth_matrix[i]);
   free(l->labyrinth_matrix);
   free(l);
@@ -124,19 +140,34 @@ void find_initial_position (labyrinth_t *l, int *x, int *y) {
   }
 }
 
-void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *head, labyrinth_t *l) {
-  printf(BOLD_COLOR_WHITE "Enter a move (" BOLD_COLOR_GREEN "N" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "S" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "E" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "O" BOLD_COLOR_WHITE "): ");
-  printf(COLOR_RESET);
-  
-  while (scanf("%c ", move) != 1) {
-    int c;
-    while((c=getchar()) != '\n' && c != EOF); //Clear the stdin
-    printf("Invalid input. Try again\n");
+bool is_move_valid (labyrinth_t *l, int row, int col, int N, int M) {
+  if ((row == 0 || row == N - 1 || col == 0 || col == M - 1) || l->labyrinth_matrix[row][col] == '#') {
+    return false;
+  }
+  return true;
+}
+
+void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *head, labyrinth_t *l, int mode) {
+  if (mode == 1) {
     printf(BOLD_COLOR_WHITE "Enter a move (" BOLD_COLOR_GREEN "N" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "S" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "E" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "O" BOLD_COLOR_WHITE "): ");
     printf(COLOR_RESET);
-  }
-  *move = getchar();
   
+    while (scanf("%c ", move) != 1) {
+      int c;
+      while((c=getchar()) != '\n' && c != EOF); //Clear the stdin
+      printf("Invalid input. Try again\n");
+      printf(BOLD_COLOR_WHITE "Enter a move (" BOLD_COLOR_GREEN "N" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "S" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "E" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "O" BOLD_COLOR_WHITE "): ");
+      printf(COLOR_RESET);
+    }
+    *move = getchar();
+  } else if (mode == 2) {
+    srand(time(NULL));
+    char moves_available[] = "NSEO";
+    int size = sizeof(moves_available) - 1;
+    int index = rand() % size;
+    *move = moves_available[index];
+  }
+
   char *tmp = moves;
   
   int old_x = head->x_snake_pos;
@@ -206,6 +237,7 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score, snake
 }
 
 void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col) {
+  
   if (*row < 0 || *row == l->N || *col < 0 || *col == l->M) {
     printf("Invalid move!\n");
     exit(1);
@@ -278,7 +310,7 @@ void check_dead_ends (labyrinth_t *l, snake_t *head) {
     head->x_snake_pos = new_head_col;
     return;
   }
-  if (l->labyrinth_matrix[head->y_snake_pos -1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
+  if (l->labyrinth_matrix[head->y_snake_pos -1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#' && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
     head->next->next = NULL;
     int new_head_row = head->next->y_snake_pos;
     int new_head_col = head->next->x_snake_pos;
@@ -328,11 +360,53 @@ void labyrinth_interactive_mode_run (int M, int N) {
 
     int row = s->y_snake_pos, col = s->x_snake_pos;
 
-    moves_input(&move, tmp++, &row, &col, &l->score, s, l);
-    
-    check_dead_ends(l, s);
+    moves_input(&move, tmp++, &row, &col, &l->score, s, l, 1);
+    obstacles_borders_check(l, s, &row, &col); 
+    check_dead_ends(l, s);    
 
-    obstacles_borders_check(l, s, &row, &col);
+    if (l->labyrinth_matrix[row][col] == '$') {
+      l->score += 10;
+      l->labyrinth_matrix[row][col] = ' ';
+      add_tail(s); 
+    }
+
+    s->y_snake_pos = row;
+    s->x_snake_pos = col;
+
+    if (l->labyrinth_matrix[row][col] == '_') {
+      *(tmp++) = '\0';
+      moves = realloc(moves, tmp - moves);
+      system("clear");
+      printf(COLOR_GREEN_HIGH_BACKGROUND BOLD_COLOR_BLACK "%s\n", moves);
+      win = true; 
+      free(moves);
+    }
+  }
+  labyrinth_free(l, s);
+  exit(0);
+}
+
+void labyrinth_AI_mode_run(int M, int N) {
+  labyrinth_t *l = (labyrinth_t *) malloc(sizeof(labyrinth_t));
+  snake_t *s = (snake_t *) malloc(sizeof(snake_t));
+  char *moves = (char *) malloc(M * N + 1);
+  char *tmp = moves; 
+  labyrinth_init(l, M, N, s);
+
+  find_initial_position(l, &s->x_snake_pos, &s->y_snake_pos);
+
+  char move;
+  bool win = false;
+
+  while (!win) {
+    system("clear");
+    labyrinth_print(l, l->M, l->N, s);
+
+    int row = s->y_snake_pos, col = s->x_snake_pos;
+
+    moves_input(&move, tmp++, &row, &col, &l->score, s, l, 2);
+    //obstacles_borders_check(l, s, &row, &col);
+    check_dead_ends(l, s);
 
     if (l->labyrinth_matrix[row][col] == '$') {
       l->score += 10;
@@ -350,11 +424,8 @@ void labyrinth_interactive_mode_run (int M, int N) {
       printf(COLOR_GREEN_HIGH_BACKGROUND BOLD_COLOR_BLACK "%s\n", moves);
       win = true; 
     }
+    sleep(2);
   }
   labyrinth_free(l, s);
-  exit(0);
-}
-
-void labyrinth_AI_mode_run(int M, int N) {
   exit(0);
 }
