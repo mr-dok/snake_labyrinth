@@ -18,6 +18,22 @@
 int main (void) {
   int M = 0, N = 0, game_mode = 0; 
 
+  printf(BOLD_COLOR_WHITE "1. Interactive mode\n" COLOR_RESET);
+  printf(BOLD_COLOR_WHITE "2. AI mode\n" COLOR_RESET); 
+  printf(BOLD_COLOR_WHITE "Select the game mode: " COLOR_RESET); 
+  
+  while (scanf("%d", &game_mode) == 0) {
+    int c;
+    while((c=getchar())!='\n' && c!=EOF); //Clear the stdin
+    printf("Invalid input. Try again\n");
+    printf(BOLD_COLOR_WHITE "1. Interactive mode\n" COLOR_RESET);
+    printf(BOLD_COLOR_WHITE "2. AI mode\n" COLOR_RESET); 
+    printf(BOLD_COLOR_WHITE "Select the game mode: " COLOR_RESET); 
+  }
+  getchar();
+
+  system("clear");
+
   printf(BOLD_COLOR_WHITE "Enter the number of columns: " COLOR_RESET);  
   while (scanf("%d", &M) == 0) {
     int c;
@@ -36,22 +52,6 @@ int main (void) {
   }
   getchar();
   
-  system("clear");
-  
-  printf(BOLD_COLOR_WHITE "1. Interactive mode\n" COLOR_RESET);
-  printf(BOLD_COLOR_WHITE "2. AI mode\n" COLOR_RESET); 
-  printf(BOLD_COLOR_WHITE "Select the game mode: " COLOR_RESET); 
-  
-  while (scanf("%d", &game_mode) == 0) {
-    int c;
-    while((c=getchar())!='\n' && c!=EOF); //Clear the stdin
-    printf("Invalid input. Try again\n");
-    printf(BOLD_COLOR_WHITE "1. Interactive mode\n" COLOR_RESET);
-    printf(BOLD_COLOR_WHITE "2. AI mode\n" COLOR_RESET); 
-    printf(BOLD_COLOR_WHITE "Select the game mode: " COLOR_RESET); 
-  }
-  getchar();
-
   system("clear");
 
   if (game_mode == 1) labyrinth_interactive_mode_run(M, N);

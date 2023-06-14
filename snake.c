@@ -304,43 +304,55 @@ void check_dead_ends (labyrinth_t *l, snake_t *head) {
   int row = head->y_snake_pos, col = head->x_snake_pos;
   // seg fault perchè l->labyrinth_matrix[head->y_snake_pos + 1][head->x_snake_pos], l->labyrinth_matrix[head->y_snake_pos + 1][head->x_snake_pos + 1] accedono ad una posizione non valida
   if (l->labyrinth_matrix[head->y_snake_pos +1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
-    head->next->next = NULL;
-    int new_head_row = head->next->y_snake_pos;
-    int new_head_col = head->next->x_snake_pos;
-    head->next->y_snake_pos = row;
-    head->next->x_snake_pos = col;
-    head->y_snake_pos = new_head_row;
-    head->x_snake_pos = new_head_col;
+    if(head->next!=NULL)
+    {
+      head->next->next = NULL;
+      int new_head_row = head->next->y_snake_pos;
+      int new_head_col = head->next->x_snake_pos;
+      head->next->y_snake_pos = row;
+      head->next->x_snake_pos = col;
+      head->y_snake_pos = new_head_row;
+      head->x_snake_pos = new_head_col;
+    }
     return;
   }
   if (l->labyrinth_matrix[head->y_snake_pos -1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#' && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
-    head->next->next = NULL;
-    int new_head_row = head->next->y_snake_pos;
-    int new_head_col = head->next->x_snake_pos;
-    head->next->y_snake_pos = row;
-    head->next->x_snake_pos = col;
-    head->y_snake_pos = new_head_row;
-    head->x_snake_pos = new_head_col;
+    if(head->next!=NULL)
+    {
+      head->next->next = NULL;
+      int new_head_row = head->next->y_snake_pos;
+      int new_head_col = head->next->x_snake_pos;
+      head->next->y_snake_pos = row;
+      head->next->x_snake_pos = col;
+      head->y_snake_pos = new_head_row;
+      head->x_snake_pos = new_head_col;
+    }
     return;
   }
   if (l->labyrinth_matrix[head->y_snake_pos +1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos-1][head->x_snake_pos] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
-    head->next->next = NULL;
-    int new_head_row = head->next->y_snake_pos;
-    int new_head_col = head->next->x_snake_pos;
-    head->next->y_snake_pos = row;
-    head->next->x_snake_pos = col;
-    head->y_snake_pos = new_head_row;
-    head->x_snake_pos = new_head_col;
+    if(head->next!=NULL)
+    {
+      head->next->next = NULL;
+      int new_head_row = head->next->y_snake_pos;
+      int new_head_col = head->next->x_snake_pos;
+      head->next->y_snake_pos = row;
+      head->next->x_snake_pos = col;
+      head->y_snake_pos = new_head_row;
+      head->x_snake_pos = new_head_col;
+    }
     return;
   }
   if (l->labyrinth_matrix[head->y_snake_pos +1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos-1][head->x_snake_pos] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#') {
-    head->next->next = NULL;
-    int new_head_row = head->next->y_snake_pos;
-    int new_head_col = head->next->x_snake_pos;
-    head->next->y_snake_pos = row;
-    head->next->x_snake_pos = col;
-    head->y_snake_pos = new_head_row;
-    head->x_snake_pos = new_head_col;
+    if(head->next!=NULL)
+    {
+      head->next->next = NULL;
+      int new_head_row = head->next->y_snake_pos;
+      int new_head_col = head->next->x_snake_pos;
+      head->next->y_snake_pos = row;
+      head->next->x_snake_pos = col;
+      head->y_snake_pos = new_head_row;
+      head->x_snake_pos = new_head_col;
+    }
     return;
   }
 }
@@ -372,8 +384,8 @@ void labyrinth_interactive_mode_run (int M, int N) {
       win = true; 
       free(moves);
     } else {
-      obstacles_borders_check(l, s, &row, &col); 
-      check_dead_ends(l, s);    
+      check_dead_ends(l, s);  
+      obstacles_borders_check(l, s, &row, &col);   
 
       if (l->labyrinth_matrix[row][col] == '$') {
         l->score += 10;
