@@ -240,12 +240,14 @@ void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col)
   
   if (*row < 0 || *row == l->N || *col < 0 || *col == l->M) {
     printf("Invalid move!\n");
+    labyrinth_free(l, head);
     exit(1);
   }
 
   if (l->labyrinth_matrix[*row][*col] == '#') {
     if (l->drill <= 0) {
       printf("Game over! You hit a wall.\n");
+      labyrinth_free(l, head);
       exit(1);
     } else {
       l->drill -= 1;
@@ -300,6 +302,7 @@ void add_tail (snake_t *head) {
 
 void check_dead_ends (labyrinth_t *l, snake_t *head) {
   int row = head->y_snake_pos, col = head->x_snake_pos;
+  // seg fault perchè l->labyrinth_matrix[head->y_snake_pos + 1][head->x_snake_pos], l->labyrinth_matrix[head->y_snake_pos + 1][head->x_snake_pos + 1] accedono ad una posizione non valida
   if (l->labyrinth_matrix[head->y_snake_pos +1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
     head->next->next = NULL;
     int new_head_row = head->next->y_snake_pos;
@@ -361,18 +364,6 @@ void labyrinth_interactive_mode_run (int M, int N) {
     int row = s->y_snake_pos, col = s->x_snake_pos;
 
     moves_input(&move, tmp++, &row, &col, &l->score, s, l, 1);
-    obstacles_borders_check(l, s, &row, &col); 
-    check_dead_ends(l, s);    
-
-    if (l->labyrinth_matrix[row][col] == '$') {
-      l->score += 10;
-      l->labyrinth_matrix[row][col] = ' ';
-      add_tail(s); 
-    }
-
-    s->y_snake_pos = row;
-    s->x_snake_pos = col;
-
     if (l->labyrinth_matrix[row][col] == '_') {
       *(tmp++) = '\0';
       moves = realloc(moves, tmp - moves);
@@ -380,6 +371,18 @@ void labyrinth_interactive_mode_run (int M, int N) {
       printf(COLOR_GREEN_HIGH_BACKGROUND BOLD_COLOR_BLACK "%s\n", moves);
       win = true; 
       free(moves);
+    } else {
+      obstacles_borders_check(l, s, &row, &col); 
+      check_dead_ends(l, s);    
+
+      if (l->labyrinth_matrix[row][col] == '$') {
+        l->score += 10;
+        l->labyrinth_matrix[row][col] = ' ';
+        add_tail(s); 
+      }
+
+      s->y_snake_pos = row;
+      s->x_snake_pos = col;
     }
   }
   labyrinth_free(l, s);
@@ -405,7 +408,7 @@ void labyrinth_AI_mode_run(int M, int N) {
     int row = s->y_snake_pos, col = s->x_snake_pos;
 
     moves_input(&move, tmp++, &row, &col, &l->score, s, l, 2);
-    //obstacles_borders_check(l, s, &row, &col);
+    obstacles_borders_check(l, s, &row, &col);
     check_dead_ends(l, s);
 
     if (l->labyrinth_matrix[row][col] == '$') {
@@ -423,8 +426,8 @@ void labyrinth_AI_mode_run(int M, int N) {
       system("clear");
       printf(COLOR_GREEN_HIGH_BACKGROUND BOLD_COLOR_BLACK "%s\n", moves);
       win = true; 
+      free(moves);
     }
-    sleep(2);
   }
   labyrinth_free(l, s);
   exit(0);

@@ -68,6 +68,8 @@ void find_initial_position (labyrinth_t *l, int *x, int *y);
  * @param col Pointer variable to the column of the labyrinth.
  * @param score Variable for storing the game's score.
  * @param s Data structure of snake type.
+ * @param l Data structure of labyrinth type.
+ * @param mode Variable that contains the chosen game mode.
  */
 
 void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *s, labyrinth_t *l, int mode);

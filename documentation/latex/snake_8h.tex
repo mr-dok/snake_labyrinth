@@ -5,6 +5,7 @@
 Project\textquotesingle{}s header file.  
 
 
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -16,12 +17,14 @@ void \mbox{\hyperlink{snake_8h_af4dd7c26af7f07c5ac92755a599d7c80}{labyrinth\+\_\
 \begin{DoxyCompactList}\small\item\em Function to print the labyrinth. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{snake_8h_a915c7e724f85b799ab526287b0b18577}{find\+\_\+initial\+\_\+position}} (labyrinth\+\_\+t $\ast$l, int $\ast$x, int $\ast$y)
 \begin{DoxyCompactList}\small\item\em Function to find the initial position of the snake. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{snake_8h_aa5c753bdc622a5681bd88fda716fd817}{moves\+\_\+input}} (char $\ast$move, char $\ast$moves, int $\ast$row, int $\ast$col, int $\ast$score, snake\+\_\+t $\ast$s)
+void \mbox{\hyperlink{snake_8h_a314e7c365311d5713a3ac16b24edbeb0}{moves\+\_\+input}} (char $\ast$move, char $\ast$moves, int $\ast$row, int $\ast$col, int $\ast$score, snake\+\_\+t $\ast$s, labyrinth\+\_\+t $\ast$l, int mode)
 \begin{DoxyCompactList}\small\item\em Function to receive input from the user and change the position of the snake. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{snake_8h_acfc9c2a13f37aa63218fcd9c6783f631}{obstacles\+\_\+borders\+\_\+check}} (labyrinth\+\_\+t $\ast$l, int $\ast$row, int $\ast$col, int $\ast$N, int $\ast$M)
-\begin{DoxyCompactList}\small\item\em Function to receive input from the user and change the position of the snake. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{snake_8h_ac714958e0c94c71011c20e328b190713}{obstacles\+\_\+borders\+\_\+check}} (labyrinth\+\_\+t $\ast$l, snake\+\_\+t $\ast$head, int $\ast$row, int $\ast$col)
+\begin{DoxyCompactList}\small\item\em Function to control obstacles (walls and invalid positions) and objects to collect. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{snake_8h_a8f15eb264cdcabee8d3c7d7146ceb1f7}{labyrinth\+\_\+interactive\+\_\+mode\+\_\+run}} (int M, int N)
-\begin{DoxyCompactList}\small\item\em Main function for interactive mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Main function for interactive mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{snake_8h_a136d1e8d84e2266fbe84f6c115040ec1}{labyrinth\+\_\+\+AI\+\_\+mode\+\_\+run}} (int M, int N)
+\begin{DoxyCompactList}\small\item\em Main function for AI mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -56,6 +59,23 @@ Function to find the initial position of the snake.
 {\em x} & Pointer variable to the x axis of the labyrinth. \\
 \hline
 {\em y} & Pointer variable to the y axis of the labyrinth. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{snake_8h_a136d1e8d84e2266fbe84f6c115040ec1}\label{snake_8h_a136d1e8d84e2266fbe84f6c115040ec1}} 
+\index{snake.h@{snake.h}!labyrinth\_AI\_mode\_run@{labyrinth\_AI\_mode\_run}}
+\index{labyrinth\_AI\_mode\_run@{labyrinth\_AI\_mode\_run}!snake.h@{snake.h}}
+\doxysubsubsection{\texorpdfstring{labyrinth\_AI\_mode\_run()}{labyrinth\_AI\_mode\_run()}}
+{\footnotesize\ttfamily void labyrinth\+\_\+\+AI\+\_\+mode\+\_\+run (\begin{DoxyParamCaption}\item[{int}]{M,  }\item[{int}]{N }\end{DoxyParamCaption})}
+
+
+
+Main function for AI mode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em M} & Number of labyrinth columns. \\
+\hline
+{\em N} & Number of labyrinth rows. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{snake_8h_acd65deeb26f89dd33e84b31afe2e9be4}\label{snake_8h_acd65deeb26f89dd33e84b31afe2e9be4}} 
@@ -134,11 +154,11 @@ Function to print the labyrinth.
 {\em s} & Data structure of snake type. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{snake_8h_aa5c753bdc622a5681bd88fda716fd817}\label{snake_8h_aa5c753bdc622a5681bd88fda716fd817}} 
+\mbox{\Hypertarget{snake_8h_a314e7c365311d5713a3ac16b24edbeb0}\label{snake_8h_a314e7c365311d5713a3ac16b24edbeb0}} 
 \index{snake.h@{snake.h}!moves\_input@{moves\_input}}
 \index{moves\_input@{moves\_input}!snake.h@{snake.h}}
 \doxysubsubsection{\texorpdfstring{moves\_input()}{moves\_input()}}
-{\footnotesize\ttfamily void moves\+\_\+input (\begin{DoxyParamCaption}\item[{char $\ast$}]{move,  }\item[{char $\ast$}]{moves,  }\item[{int $\ast$}]{row,  }\item[{int $\ast$}]{col,  }\item[{int $\ast$}]{score,  }\item[{snake\+\_\+t $\ast$}]{s }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void moves\+\_\+input (\begin{DoxyParamCaption}\item[{char $\ast$}]{move,  }\item[{char $\ast$}]{moves,  }\item[{int $\ast$}]{row,  }\item[{int $\ast$}]{col,  }\item[{int $\ast$}]{score,  }\item[{snake\+\_\+t $\ast$}]{s,  }\item[{labyrinth\+\_\+t $\ast$}]{l,  }\item[{int}]{mode }\end{DoxyParamCaption})}
 
 
 
@@ -158,27 +178,29 @@ Function to receive input from the user and change the position of the snake.
 \hline
 {\em s} & Data structure of snake type. \\
 \hline
+{\em l} & Data structure of labyrinth type. \\
+\hline
+{\em mode} & Variable that contains the chosen game mode. \\
+\hline
 \end{DoxyParams}
-\mbox{\Hypertarget{snake_8h_acfc9c2a13f37aa63218fcd9c6783f631}\label{snake_8h_acfc9c2a13f37aa63218fcd9c6783f631}} 
+\mbox{\Hypertarget{snake_8h_ac714958e0c94c71011c20e328b190713}\label{snake_8h_ac714958e0c94c71011c20e328b190713}} 
 \index{snake.h@{snake.h}!obstacles\_borders\_check@{obstacles\_borders\_check}}
 \index{obstacles\_borders\_check@{obstacles\_borders\_check}!snake.h@{snake.h}}
 \doxysubsubsection{\texorpdfstring{obstacles\_borders\_check()}{obstacles\_borders\_check()}}
-{\footnotesize\ttfamily void obstacles\+\_\+borders\+\_\+check (\begin{DoxyParamCaption}\item[{labyrinth\+\_\+t $\ast$}]{l,  }\item[{int $\ast$}]{row,  }\item[{int $\ast$}]{col,  }\item[{int $\ast$}]{N,  }\item[{int $\ast$}]{M }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void obstacles\+\_\+borders\+\_\+check (\begin{DoxyParamCaption}\item[{labyrinth\+\_\+t $\ast$}]{l,  }\item[{snake\+\_\+t $\ast$}]{head,  }\item[{int $\ast$}]{row,  }\item[{int $\ast$}]{col }\end{DoxyParamCaption})}
 
 
 
-Function to receive input from the user and change the position of the snake. 
+Function to control obstacles (walls and invalid positions) and objects to collect. 
 
 
 \begin{DoxyParams}{Parameters}
 {\em l} & Data structure of labyrinth type. \\
 \hline
+{\em head} & Data structure of snake type. \\
+\hline
 {\em row} & Pointer variable to the row of the labyrinth. \\
 \hline
 {\em col} & Pointer variable to the column of the labyrinth. \\
-\hline
-{\em N} & Number of labyrinth rows. \\
-\hline
-{\em M} & Number of labyrinth columns. \\
 \hline
 \end{DoxyParams}

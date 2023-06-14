@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['y_5fsnake_5fpos_0',['y_snake_pos',['../structsnake.html#a0c9c64051e2b17231cfab2815c0c329d',1,'snake']]]
+  ['x_5fsnake_5fpos_0',['x_snake_pos',['../structsnake.html#acd87673b4023e5ee8eef5927eed07ac4',1,'snake']]]
 ];
