@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include <string.h>
 
 struct snake {
   char head;
@@ -84,6 +85,7 @@ void labyrinth_print (labyrinth_t *l, int M, int N, snake_t *s) {
         while (tail != NULL) {
           if (i == tail->y_snake_pos && j == tail->x_snake_pos) {
             printf(BOLD_COLOR_WHITE "%c ", tail->head);
+            printf(COLOR_RESET);
             is_tail = 1;
             break;
           }
@@ -140,13 +142,6 @@ void find_initial_position (labyrinth_t *l, int *x, int *y) {
   }
 }
 
-bool is_move_valid (labyrinth_t *l, int row, int col, int N, int M) {
-  if ((row == 0 || row == N - 1 || col == 0 || col == M - 1) || l->labyrinth_matrix[row][col] == '#') {
-    return false;
-  }
-  return true;
-}
-
 void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *head, labyrinth_t *l, int mode) {
   if (mode == 1) {
     printf(BOLD_COLOR_WHITE "Enter a move (" BOLD_COLOR_GREEN "N" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "S" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "E" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "O" BOLD_COLOR_WHITE "): ");
@@ -160,12 +155,6 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score, snake
       printf(COLOR_RESET);
     }
     *move = getchar();
-  } else if (mode == 2) {
-    srand(time(NULL));
-    char moves_available[] = "NSEO";
-    int size = sizeof(moves_available) - 1;
-    int index = rand() % size;
-    *move = moves_available[index];
   }
 
   char *tmp = moves;
@@ -301,59 +290,44 @@ void add_tail (snake_t *head) {
 }
 
 void check_dead_ends (labyrinth_t *l, snake_t *head) {
-  int row = head->y_snake_pos, col = head->x_snake_pos;
-  // seg fault perchè l->labyrinth_matrix[head->y_snake_pos + 1][head->x_snake_pos], l->labyrinth_matrix[head->y_snake_pos + 1][head->x_snake_pos + 1] accedono ad una posizione non valida
-  if (l->labyrinth_matrix[head->y_snake_pos +1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
-    if(head->next!=NULL)
-    {
-      head->next->next = NULL;
-      int new_head_row = head->next->y_snake_pos;
-      int new_head_col = head->next->x_snake_pos;
-      head->next->y_snake_pos = row;
-      head->next->x_snake_pos = col;
-      head->y_snake_pos = new_head_row;
-      head->x_snake_pos = new_head_col;
-    }
+  if (!head->next)
     return;
+  int row = head->y_snake_pos, col = head->x_snake_pos;
+  if (l->labyrinth_matrix[head->y_snake_pos +1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
+    head->next->next = NULL;
+    int new_head_row = head->next->y_snake_pos;
+    int new_head_col = head->next->x_snake_pos;
+    head->next->y_snake_pos = row;
+    head->next->x_snake_pos = col;
+    head->y_snake_pos = new_head_row;
+    head->x_snake_pos = new_head_col;
   }
   if (l->labyrinth_matrix[head->y_snake_pos -1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#' && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
-    if(head->next!=NULL)
-    {
-      head->next->next = NULL;
-      int new_head_row = head->next->y_snake_pos;
-      int new_head_col = head->next->x_snake_pos;
-      head->next->y_snake_pos = row;
-      head->next->x_snake_pos = col;
-      head->y_snake_pos = new_head_row;
-      head->x_snake_pos = new_head_col;
-    }
-    return;
+    head->next->next = NULL;
+    int new_head_row = head->next->y_snake_pos;
+    int new_head_col = head->next->x_snake_pos;
+    head->next->y_snake_pos = row;
+    head->next->x_snake_pos = col;
+    head->y_snake_pos = new_head_row;
+    head->x_snake_pos = new_head_col;
   }
   if (l->labyrinth_matrix[head->y_snake_pos +1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos-1][head->x_snake_pos] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos+1] == '#') {
-    if(head->next!=NULL)
-    {
-      head->next->next = NULL;
-      int new_head_row = head->next->y_snake_pos;
-      int new_head_col = head->next->x_snake_pos;
-      head->next->y_snake_pos = row;
-      head->next->x_snake_pos = col;
-      head->y_snake_pos = new_head_row;
-      head->x_snake_pos = new_head_col;
-    }
-    return;
+    head->next->next = NULL;
+    int new_head_row = head->next->y_snake_pos;
+    int new_head_col = head->next->x_snake_pos;
+    head->next->y_snake_pos = row;
+    head->next->x_snake_pos = col;
+    head->y_snake_pos = new_head_row;
+    head->x_snake_pos = new_head_col;
   }
   if (l->labyrinth_matrix[head->y_snake_pos +1][head->x_snake_pos] == '#' && l->labyrinth_matrix[head->y_snake_pos-1][head->x_snake_pos] == '#'  && l->labyrinth_matrix[head->y_snake_pos][head->x_snake_pos-1] == '#') {
-    if(head->next!=NULL)
-    {
-      head->next->next = NULL;
-      int new_head_row = head->next->y_snake_pos;
-      int new_head_col = head->next->x_snake_pos;
-      head->next->y_snake_pos = row;
-      head->next->x_snake_pos = col;
-      head->y_snake_pos = new_head_row;
-      head->x_snake_pos = new_head_col;
-    }
-    return;
+    head->next->next = NULL;
+    int new_head_row = head->next->y_snake_pos;
+    int new_head_col = head->next->x_snake_pos;
+    head->next->y_snake_pos = row;
+    head->next->x_snake_pos = col;
+    head->y_snake_pos = new_head_row;
+    head->x_snake_pos = new_head_col;
   }
 }
 
@@ -371,21 +345,23 @@ void labyrinth_interactive_mode_run (int M, int N) {
 
   while (!win) {
     system("clear");
-    labyrinth_print(l, l->M, l->N, s);
+    labyrinth_print(l, M, N, s);
 
     int row = s->y_snake_pos, col = s->x_snake_pos;
 
     moves_input(&move, tmp++, &row, &col, &l->score, s, l, 1);
+    obstacles_borders_check(l, s, &row, &col);
+    
     if (l->labyrinth_matrix[row][col] == '_') {
       *(tmp++) = '\0';
       moves = realloc(moves, tmp - moves);
       system("clear");
       printf(COLOR_GREEN_HIGH_BACKGROUND BOLD_COLOR_BLACK "%s\n", moves);
+      printf(COLOR_RESET);
       win = true; 
       free(moves);
     } else {
       check_dead_ends(l, s);  
-      obstacles_borders_check(l, s, &row, &col);   
 
       if (l->labyrinth_matrix[row][col] == '$') {
         l->score += 10;
@@ -407,7 +383,7 @@ void labyrinth_AI_mode_run(int M, int N) {
   char *moves = (char *) malloc(M * N + 1);
   char *tmp = moves; 
   labyrinth_init(l, M, N, s);
-
+  
   find_initial_position(l, &s->x_snake_pos, &s->y_snake_pos);
 
   char move;
@@ -415,31 +391,79 @@ void labyrinth_AI_mode_run(int M, int N) {
 
   while (!win) {
     system("clear");
-    labyrinth_print(l, l->M, l->N, s);
-
+    labyrinth_print(l, M, N, s);
+    
     int row = s->y_snake_pos, col = s->x_snake_pos;
 
-    moves_input(&move, tmp++, &row, &col, &l->score, s, l, 2);
-    obstacles_borders_check(l, s, &row, &col);
-    check_dead_ends(l, s);
-
-    if (l->labyrinth_matrix[row][col] == '$') {
-      l->score += 10;
-      l->labyrinth_matrix[row][col] = ' ';
-      add_tail(s); 
+    if (row >= 0 || row < l->N || col >= 0 || col < l->M) {
+      if (l->labyrinth_matrix[row][col+1] == ' ' && l->labyrinth_matrix[row+1][col+1] == '#') {
+        move = 'E';
+      } 
+      if (l->labyrinth_matrix[row][col+1] == ' ' && l->labyrinth_matrix[row-1][col+1] == '#') {
+        move = 'E';
+      }
+      if (l->labyrinth_matrix[row][col+1] == ' ' && l->labyrinth_matrix[row+1][col+1] == ' ' && l->labyrinth_matrix[row-1][col+1] == ' ') {
+        move = 'E';
+      }
+      if (l->labyrinth_matrix[row][col-1] == ' ' && l->labyrinth_matrix[row+1][col-1] == '#') {
+        move = 'O';
+      }
+      if (l->labyrinth_matrix[row][col-1] == ' ' && l->labyrinth_matrix[row-1][col-1] == '#') {
+        move = 'O';
+      }
+      if (l->labyrinth_matrix[row][col-1] == ' ' && l->labyrinth_matrix[row+1][col-1] == ' ' && l->labyrinth_matrix[row-1][col-1] == ' ') {
+        move = 'O';
+      } 
+      if (l->labyrinth_matrix[row+1][col] == ' ' && l->labyrinth_matrix[row+1][col-1] == '#') {
+        move = 'S';
+      } 
+      if (l->labyrinth_matrix[row+1][col] == ' ' && l->labyrinth_matrix[row+1][col+1] == '#') {
+        move = 'S';
+      } 
+      if (l->labyrinth_matrix[row+1][col] == ' ' && l->labyrinth_matrix[row+1][col-1] == ' ' && l->labyrinth_matrix[row+1][col+1] == ' ') {
+        move = 'S';
+      } 
+      if (l->labyrinth_matrix[row-1][col] == ' ' && l->labyrinth_matrix[row-1][col-1] == '#') {
+        move = 'N';
+      } 
+      if (l->labyrinth_matrix[row-1][col] == ' ' && l->labyrinth_matrix[row-1][col+1] == '#') {
+        move = 'N';
+      } 
+      if (l->labyrinth_matrix[row-1][col] == ' ' && l->labyrinth_matrix[row-1][col-1] == ' ' && l->labyrinth_matrix[row-1][col+1] == ' ') {
+        move = 'N';
+      } 
+      if (l->labyrinth_matrix[row][col+1] == ' ' && l->labyrinth_matrix[row-1][col] == ' ' && l->labyrinth_matrix[row+1][col] == ' ' && l->labyrinth_matrix[row+1][col-1] == '#') {
+        move = 'S';
+      }
+      if (l->labyrinth_matrix[row][col-1] == '#' && l->labyrinth_matrix[row][col+1] == ' ' && l->labyrinth_matrix[row+1][col] == ' ') {
+        move = 'E';
+      }
     }
 
-    s->y_snake_pos = row;
-    s->x_snake_pos = col;
+    moves_input(&move, tmp++, &row, &col, &l->score, s, l, 0);
+    obstacles_borders_check(l, s, &row, &col);
 
     if (l->labyrinth_matrix[row][col] == '_') {
       *(tmp++) = '\0';
       moves = realloc(moves, tmp - moves);
       system("clear");
       printf(COLOR_GREEN_HIGH_BACKGROUND BOLD_COLOR_BLACK "%s\n", moves);
+      printf(COLOR_RESET);
       win = true; 
       free(moves);
+    } else {
+      check_dead_ends(l, s);  
+
+      if (l->labyrinth_matrix[row][col] == '$') {
+        l->score += 10;
+        l->labyrinth_matrix[row][col] = ' ';
+        add_tail(s); 
+      }
+
+      s->y_snake_pos = row;
+      s->x_snake_pos = col;
     }
+    sleep(1);
   }
   labyrinth_free(l, s);
   exit(0);

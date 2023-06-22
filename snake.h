@@ -85,6 +85,10 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score, snake
 
 void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col);
 
+void add_tail (snake_t *head); 
+
+void check_dead_ends (labyrinth_t *l, snake_t *head); 
+
 /**
  * @brief Main function for interactive mode.
  *
