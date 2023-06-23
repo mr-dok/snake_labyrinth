@@ -142,6 +142,14 @@ void find_initial_position (labyrinth_t *l, int *x, int *y) {
   }
 }
 
+bool is_move_valid (labyrinth_t *l, int row, int col) {
+  
+  if (row < 0 || row == l->N || col < 0 || col == l->M) {
+    return false;
+  }
+  return true;
+}
+
 void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *head, labyrinth_t *l, int mode) {
   if (mode == 1) {
     printf(BOLD_COLOR_WHITE "Enter a move (" BOLD_COLOR_GREEN "N" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "S" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "E" BOLD_COLOR_WHITE "/" BOLD_COLOR_GREEN "O" BOLD_COLOR_WHITE "): ");
@@ -377,72 +385,131 @@ void labyrinth_interactive_mode_run (int M, int N) {
   exit(0);
 }
 
+int checkXWest(labyrinth_t *l, int row, int col)
+{
+    if(col-1< 0 || l->labyrinth_matrix[row][col-1] == '#')
+        return 0; /*If we can't move we return 0 and continue with the wall follower algorithm*/
+
+    else
+        return 1;/*we return 1 indicating it's safe to move*/
+}
+int checkXEast(labyrinth_t *l, int row, int col)
+{
+    if(col+1 >= l->M || l->labyrinth_matrix[row][col+1] == '#')
+        return 0;
+
+    else
+        return 1;
+}
+int checkYNorth(labyrinth_t *l, int row, int col)
+{
+    if(row-1 < 0 || l->labyrinth_matrix[row-1][col] == '#')
+        return 0;
+
+    else
+        return 1;
+}
+int checkYSouth(labyrinth_t *l, int row, int col)
+{
+    if(row+1 >= l->N || l->labyrinth_matrix[row+1][col] == '#')
+        return 0;
+
+    else
+        return 1;
+}
+
+
 void labyrinth_AI_mode_run(int M, int N) {
   labyrinth_t *l = (labyrinth_t *) malloc(sizeof(labyrinth_t));
   snake_t *s = (snake_t *) malloc(sizeof(snake_t));
   char *moves = (char *) malloc(M * N + 1);
   char *tmp = moves; 
   labyrinth_init(l, M, N, s);
-  
-  find_initial_position(l, &s->x_snake_pos, &s->y_snake_pos);
 
-  char move;
+  find_initial_position(l, &s->x_snake_pos, &s->y_snake_pos);
+  char move='S';
+  char move_prec=move;
   bool win = false;
 
   while (!win) {
     system("clear");
     labyrinth_print(l, M, N, s);
-    
+
     int row = s->y_snake_pos, col = s->x_snake_pos;
 
-    if (row >= 0 || row < l->N || col >= 0 || col < l->M) {
-      if (l->labyrinth_matrix[row][col+1] == ' ' && l->labyrinth_matrix[row+1][col+1] == '#') {
-        move = 'E';
-      } 
-      if (l->labyrinth_matrix[row][col+1] == ' ' && l->labyrinth_matrix[row-1][col+1] == '#') {
-        move = 'E';
-      }
-      if (l->labyrinth_matrix[row][col+1] == ' ' && l->labyrinth_matrix[row+1][col+1] == ' ' && l->labyrinth_matrix[row-1][col+1] == ' ') {
-        move = 'E';
-      }
-      if (l->labyrinth_matrix[row][col-1] == ' ' && l->labyrinth_matrix[row+1][col-1] == '#') {
-        move = 'O';
-      }
-      if (l->labyrinth_matrix[row][col-1] == ' ' && l->labyrinth_matrix[row-1][col-1] == '#') {
-        move = 'O';
-      }
-      if (l->labyrinth_matrix[row][col-1] == ' ' && l->labyrinth_matrix[row+1][col-1] == ' ' && l->labyrinth_matrix[row-1][col-1] == ' ') {
-        move = 'O';
-      } 
-      if (l->labyrinth_matrix[row+1][col] == ' ' && l->labyrinth_matrix[row+1][col-1] == '#') {
-        move = 'S';
-      } 
-      if (l->labyrinth_matrix[row+1][col] == ' ' && l->labyrinth_matrix[row+1][col+1] == '#') {
-        move = 'S';
-      } 
-      if (l->labyrinth_matrix[row+1][col] == ' ' && l->labyrinth_matrix[row+1][col-1] == ' ' && l->labyrinth_matrix[row+1][col+1] == ' ') {
-        move = 'S';
-      } 
-      if (l->labyrinth_matrix[row-1][col] == ' ' && l->labyrinth_matrix[row-1][col-1] == '#') {
-        move = 'N';
-      } 
-      if (l->labyrinth_matrix[row-1][col] == ' ' && l->labyrinth_matrix[row-1][col+1] == '#') {
-        move = 'N';
-      } 
-      if (l->labyrinth_matrix[row-1][col] == ' ' && l->labyrinth_matrix[row-1][col-1] == ' ' && l->labyrinth_matrix[row-1][col+1] == ' ') {
-        move = 'N';
-      } 
-      if (l->labyrinth_matrix[row][col+1] == ' ' && l->labyrinth_matrix[row-1][col] == ' ' && l->labyrinth_matrix[row+1][col] == ' ' && l->labyrinth_matrix[row+1][col-1] == '#') {
-        move = 'S';
-      }
-      if (l->labyrinth_matrix[row][col-1] == '#' && l->labyrinth_matrix[row][col+1] == ' ' && l->labyrinth_matrix[row+1][col] == ' ') {
-        move = 'E';
+    if(move_prec=='N')
+    {
+      if(checkXEast(l,row,col))
+      {
+        move='E';
+      }else if(checkYNorth(l,row,col))
+      {
+        move='N';
+      }else if(checkXWest(l,row,col))
+      {
+        move='O';
+      }else if(checkYSouth(l,row,col))
+      {
+        move='S';
       }
     }
-
-    moves_input(&move, tmp++, &row, &col, &l->score, s, l, 0);
-    obstacles_borders_check(l, s, &row, &col);
-
+    else
+    {
+      if(move_prec=='S')
+      {
+        if(checkXWest(l,row,col))
+        {
+          move='O';
+        }else if(checkYSouth(l,row,col))
+        {
+          move='S';
+        }else if(checkXEast(l,row,col))
+        {
+          move='E';
+        }else if(checkYNorth(l,row,col))
+        {
+          move='N';
+        }
+      }
+      else
+      {
+        if(move_prec=='E')
+        {
+          if(checkYSouth(l,row,col))
+          {
+            move='S';
+          }else if(checkXEast(l,row,col))
+          {
+            move='E';
+          }else if(checkYNorth(l,row,col))
+          {
+            move='N';
+          }else if(checkXWest(l,row,col))
+          {
+            move='O';
+          }
+        }
+        else if(move_prec=='O')
+        {
+          if(checkYNorth(l,row,col))
+          {
+            move='N';
+          }else if(checkXWest(l,row,col))
+          {
+            move='O';
+          }else if(checkYSouth(l,row,col))
+          {
+            move='S';
+          }else if(checkXEast(l,row,col))
+          {
+            move='E';
+          }
+        }
+      }
+    }
+    moves_input(&move, tmp++, &row, &col, &l->score, s, l, 2);
+    //obstacles_borders_check(l, s, &row, &col);
+    
     if (l->labyrinth_matrix[row][col] == '_') {
       *(tmp++) = '\0';
       moves = realloc(moves, tmp - moves);
@@ -452,7 +519,7 @@ void labyrinth_AI_mode_run(int M, int N) {
       win = true; 
       free(moves);
     } else {
-      check_dead_ends(l, s);  
+      //check_dead_ends(l, s);  
 
       if (l->labyrinth_matrix[row][col] == '$') {
         l->score += 10;
@@ -463,7 +530,7 @@ void labyrinth_AI_mode_run(int M, int N) {
       s->y_snake_pos = row;
       s->x_snake_pos = col;
     }
-    sleep(1);
+    move_prec=move;
   }
   labyrinth_free(l, s);
   exit(0);
