@@ -86,47 +86,63 @@ $(function() {
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;time.h&gt;</code><br />
 <code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsnake.html">snake_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data structure to represent the snake.  <a href="structsnake.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the snake.  <a href="structsnake.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlabyrinth.html">labyrinth_t</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Data structure to represent the labyrinth.  <a href="structlabyrinth.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the labyrinth.  <a href="structlabyrinth.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a2d83b8480d86f05d028360c36f7a9335"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a2d83b8480d86f05d028360c36f7a9335">labyrinth_init</a> (labyrinth_t *l, int M, int N, snake_t *s)</td></tr>
-<tr class="memdesc:a2d83b8480d86f05d028360c36f7a9335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to initialize the data structures.  <br /></td></tr>
+<tr class="memdesc:a2d83b8480d86f05d028360c36f7a9335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the data structures.  <br /></td></tr>
 <tr class="separator:a2d83b8480d86f05d028360c36f7a9335"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd65deeb26f89dd33e84b31afe2e9be4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#acd65deeb26f89dd33e84b31afe2e9be4">labyrinth_free</a> (labyrinth_t *l, snake_t *s)</td></tr>
-<tr class="memdesc:acd65deeb26f89dd33e84b31afe2e9be4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to free the occupied memory.  <br /></td></tr>
+<tr class="memdesc:acd65deeb26f89dd33e84b31afe2e9be4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frees the occupied memory for the labyrinth and snake structures.  <br /></td></tr>
 <tr class="separator:acd65deeb26f89dd33e84b31afe2e9be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4dd7c26af7f07c5ac92755a599d7c80"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#af4dd7c26af7f07c5ac92755a599d7c80">labyrinth_print</a> (labyrinth_t *l, int M, int N, snake_t *s)</td></tr>
-<tr class="memdesc:af4dd7c26af7f07c5ac92755a599d7c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to print the labyrinth.  <br /></td></tr>
+<tr class="memdesc:af4dd7c26af7f07c5ac92755a599d7c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the current state of the labyrinth game.  <br /></td></tr>
 <tr class="separator:af4dd7c26af7f07c5ac92755a599d7c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a915c7e724f85b799ab526287b0b18577"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a915c7e724f85b799ab526287b0b18577">find_initial_position</a> (labyrinth_t *l, int *x, int *y)</td></tr>
-<tr class="memdesc:a915c7e724f85b799ab526287b0b18577"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to find the initial position of the snake.  <br /></td></tr>
+<tr class="memdesc:a915c7e724f85b799ab526287b0b18577"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the initial position of the snake in the labyrinth.  <br /></td></tr>
 <tr class="separator:a915c7e724f85b799ab526287b0b18577"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a061bed059e334dfdac25feae5903cef6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a061bed059e334dfdac25feae5903cef6">is_move_valid</a> (labyrinth_t *l, int row, int col, int N, int M)</td></tr>
-<tr class="separator:a061bed059e334dfdac25feae5903cef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6e46557bdf7449620dcc1d92fb54741"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#ad6e46557bdf7449620dcc1d92fb54741">is_move_valid</a> (labyrinth_t *l, int row, int col)</td></tr>
+<tr class="memdesc:ad6e46557bdf7449620dcc1d92fb54741"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a move is valid within the labyrinth boundaries.  <br /></td></tr>
+<tr class="separator:ad6e46557bdf7449620dcc1d92fb54741"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e6ac01d8773c1f85892a883ff9d78ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a2e6ac01d8773c1f85892a883ff9d78ee">moves_input</a> (char *move, char *moves, int *row, int *col, int *score, snake_t *head, labyrinth_t *l, int mode)</td></tr>
-<tr class="memdesc:a2e6ac01d8773c1f85892a883ff9d78ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to receive input from the user and change the position of the snake.  <br /></td></tr>
+<tr class="memdesc:a2e6ac01d8773c1f85892a883ff9d78ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles user input for moves and updates the game state accordingly.  <br /></td></tr>
 <tr class="separator:a2e6ac01d8773c1f85892a883ff9d78ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac714958e0c94c71011c20e328b190713"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#ac714958e0c94c71011c20e328b190713">obstacles_borders_check</a> (labyrinth_t *l, snake_t *head, int *row, int *col)</td></tr>
-<tr class="memdesc:ac714958e0c94c71011c20e328b190713"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to control obstacles (walls and invalid positions) and objects to collect.  <br /></td></tr>
+<tr class="memdesc:ac714958e0c94c71011c20e328b190713"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks for obstacles, borders and bjects to collect and handles collisions.  <br /></td></tr>
 <tr class="separator:ac714958e0c94c71011c20e328b190713"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1c45d9f8d4376d14696e63c224545a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#af1c45d9f8d4376d14696e63c224545a6">add_tail</a> (snake_t *head)</td></tr>
-<tr class="separator:af1c45d9f8d4376d14696e63c224545a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3055abf64a540861047c261a5c4145e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#ab3055abf64a540861047c261a5c4145e">add_tail</a> (snake_t *head)</td></tr>
+<tr class="memdesc:ab3055abf64a540861047c261a5c4145e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new tail segment to the snake.  <br /></td></tr>
+<tr class="separator:ab3055abf64a540861047c261a5c4145e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60263fa58e443d898df01c3a170817ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a60263fa58e443d898df01c3a170817ba">check_dead_ends</a> (labyrinth_t *l, snake_t *head)</td></tr>
+<tr class="memdesc:a60263fa58e443d898df01c3a170817ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks for dead ends and moves the snake accordingly.  <br /></td></tr>
 <tr class="separator:a60263fa58e443d898df01c3a170817ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f15eb264cdcabee8d3c7d7146ceb1f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a8f15eb264cdcabee8d3c7d7146ceb1f7">labyrinth_interactive_mode_run</a> (int M, int N)</td></tr>
-<tr class="memdesc:a8f15eb264cdcabee8d3c7d7146ceb1f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function for interactive mode.  <br /></td></tr>
+<tr class="memdesc:a8f15eb264cdcabee8d3c7d7146ceb1f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the labyrinth game in interactive mode.  <br /></td></tr>
 <tr class="separator:a8f15eb264cdcabee8d3c7d7146ceb1f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5995d18ba89293a6d42c6d262e5e4a58"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a5995d18ba89293a6d42c6d262e5e4a58">checkXWest</a> (labyrinth_t *l, int row, int col)</td></tr>
+<tr class="memdesc:a5995d18ba89293a6d42c6d262e5e4a58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if it's safe to move to the west.  <br /></td></tr>
+<tr class="separator:a5995d18ba89293a6d42c6d262e5e4a58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdc587414ed2a344485a893d57d4af3d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#afdc587414ed2a344485a893d57d4af3d">checkXEast</a> (labyrinth_t *l, int row, int col)</td></tr>
+<tr class="memdesc:afdc587414ed2a344485a893d57d4af3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if it's safe to move to the east.  <br /></td></tr>
+<tr class="separator:afdc587414ed2a344485a893d57d4af3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29ca3f45eb23225e37b7ecf276914680"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a29ca3f45eb23225e37b7ecf276914680">checkYNorth</a> (labyrinth_t *l, int row, int col)</td></tr>
+<tr class="memdesc:a29ca3f45eb23225e37b7ecf276914680"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if it's safe to move to the north.  <br /></td></tr>
+<tr class="separator:a29ca3f45eb23225e37b7ecf276914680"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf3524bc28c9f393404021be8aa74fe5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#acf3524bc28c9f393404021be8aa74fe5">checkYSouth</a> (labyrinth_t *l, int row, int col)</td></tr>
+<tr class="memdesc:acf3524bc28c9f393404021be8aa74fe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if it's safe to move to the south.  <br /></td></tr>
+<tr class="separator:acf3524bc28c9f393404021be8aa74fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a136d1e8d84e2266fbe84f6c115040ec1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="snake_8c.html#a136d1e8d84e2266fbe84f6c115040ec1">labyrinth_AI_mode_run</a> (int M, int N)</td></tr>
-<tr class="memdesc:a136d1e8d84e2266fbe84f6c115040ec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function for AI mode.  <br /></td></tr>
+<tr class="memdesc:a136d1e8d84e2266fbe84f6c115040ec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the labyrinth game in AI mode.  <br /></td></tr>
 <tr class="separator:a136d1e8d84e2266fbe84f6c115040ec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -135,14 +151,14 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>2023-04-27</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2023 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="af1c45d9f8d4376d14696e63c224545a6" name="af1c45d9f8d4376d14696e63c224545a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1c45d9f8d4376d14696e63c224545a6">&#9670;&#160;</a></span>add_tail()</h2>
+<a id="ab3055abf64a540861047c261a5c4145e" name="ab3055abf64a540861047c261a5c4145e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3055abf64a540861047c261a5c4145e">&#9670;&#160;</a></span>add_tail()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void add_tail </td>
+          <td class="memname">add_tail </td>
           <td>(</td>
           <td class="paramtype">snake_t *&#160;</td>
           <td class="paramname"><em>head</em></td><td>)</td>
@@ -150,6 +166,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Adds a new tail segment to the snake. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">head</td><td>Pointer to the snake's head. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -178,6 +202,195 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Checks for dead ends and moves the snake accordingly. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>Pointer to the labyrinth. </td></tr>
+    <tr><td class="paramname">head</td><td>Pointer to the snake's head. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="afdc587414ed2a344485a893d57d4af3d" name="afdc587414ed2a344485a893d57d4af3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdc587414ed2a344485a893d57d4af3d">&#9670;&#160;</a></span>checkXEast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">checkXEast </td>
+          <td>(</td>
+          <td class="paramtype">labyrinth_t *&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>col</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if it's safe to move to the east. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>Pointer to the labyrinth. </td></tr>
+    <tr><td class="paramname">row</td><td>The current row position. </td></tr>
+    <tr><td class="paramname">col</td><td>The current column position. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 if it's safe to move, 0 otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a5995d18ba89293a6d42c6d262e5e4a58" name="a5995d18ba89293a6d42c6d262e5e4a58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5995d18ba89293a6d42c6d262e5e4a58">&#9670;&#160;</a></span>checkXWest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">checkXWest </td>
+          <td>(</td>
+          <td class="paramtype">labyrinth_t *&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>col</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if it's safe to move to the west. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>Pointer to the labyrinth. </td></tr>
+    <tr><td class="paramname">row</td><td>The current row position. </td></tr>
+    <tr><td class="paramname">col</td><td>The current column position. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 if it's safe to move, 0 otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a29ca3f45eb23225e37b7ecf276914680" name="a29ca3f45eb23225e37b7ecf276914680"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29ca3f45eb23225e37b7ecf276914680">&#9670;&#160;</a></span>checkYNorth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">checkYNorth </td>
+          <td>(</td>
+          <td class="paramtype">labyrinth_t *&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>col</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if it's safe to move to the north. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>Pointer to the labyrinth. </td></tr>
+    <tr><td class="paramname">row</td><td>The current row position. </td></tr>
+    <tr><td class="paramname">col</td><td>The current column position. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 if it's safe to move, 0 otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="acf3524bc28c9f393404021be8aa74fe5" name="acf3524bc28c9f393404021be8aa74fe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf3524bc28c9f393404021be8aa74fe5">&#9670;&#160;</a></span>checkYSouth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">checkYSouth </td>
+          <td>(</td>
+          <td class="paramtype">labyrinth_t *&#160;</td>
+          <td class="paramname"><em>l</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>row</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>col</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checks if it's safe to move to the south. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>Pointer to the labyrinth. </td></tr>
+    <tr><td class="paramname">row</td><td>The current row position. </td></tr>
+    <tr><td class="paramname">col</td><td>The current column position. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 if it's safe to move, 0 otherwise. </dd></dl>
 
 </div>
 </div>
@@ -213,20 +426,20 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function to find the initial position of the snake. </p>
+<p>Finds the initial position of the snake in the labyrinth. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">l</td><td>Data structure of labyrinth type. </td></tr>
-    <tr><td class="paramname">x</td><td>Pointer variable to the x axis of the labyrinth. </td></tr>
-    <tr><td class="paramname">y</td><td>Pointer variable to the y axis of the labyrinth. </td></tr>
+    <tr><td class="paramname">l</td><td>Pointer to the labyrinth_t structure. </td></tr>
+    <tr><td class="paramname">x</td><td>Pointer to store the X-coordinate of the initial position. </td></tr>
+    <tr><td class="paramname">y</td><td>Pointer to store the Y-coordinate of the initial position. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="a061bed059e334dfdac25feae5903cef6" name="a061bed059e334dfdac25feae5903cef6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a061bed059e334dfdac25feae5903cef6">&#9670;&#160;</a></span>is_move_valid()</h2>
+<a id="ad6e46557bdf7449620dcc1d92fb54741" name="ad6e46557bdf7449620dcc1d92fb54741"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6e46557bdf7449620dcc1d92fb54741">&#9670;&#160;</a></span>is_move_valid()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -247,19 +460,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>col</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>N</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>M</em>&#160;</td>
+          <td class="paramname"><em>col</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -268,6 +469,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Checks if a move is valid within the labyrinth boundaries. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">l</td><td>Pointer to the labyrinth_t structure. </td></tr>
+    <tr><td class="paramname">row</td><td>The row coordinate of the move. </td></tr>
+    <tr><td class="paramname">col</td><td>The column coordinate of the move. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the move is valid, false otherwise. </dd></dl>
 
 </div>
 </div>
@@ -297,11 +509,11 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Main function for AI mode. </p>
+<p>Runs the labyrinth game in AI mode. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">M</td><td>Number of labyrinth columns. </td></tr>
-    <tr><td class="paramname">N</td><td>Number of labyrinth rows. </td></tr>
+    <tr><td class="paramname">M</td><td>The width of the labyrinth. </td></tr>
+    <tr><td class="paramname">N</td><td>The height of the labyrinth. </td></tr>
   </table>
   </dd>
 </dl>
@@ -334,11 +546,11 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function to free the occupied memory. </p>
+<p>Frees the occupied memory for the labyrinth and snake structures. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">l</td><td>Data structure of labyrinth type. </td></tr>
-    <tr><td class="paramname">s</td><td>Data structure of snake type. </td></tr>
+    <tr><td class="paramname">l</td><td>Pointer to the labyrinth_t structure to free. </td></tr>
+    <tr><td class="paramname">s</td><td>Pointer to the snake_t structure to free. </td></tr>
   </table>
   </dd>
 </dl>
@@ -383,13 +595,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function to initialize the data structures. </p>
+<p>Initializes the data structures. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">l</td><td>Data structure of labyrinth type. </td></tr>
-    <tr><td class="paramname">M</td><td>Number of labyrinth columns. </td></tr>
-    <tr><td class="paramname">N</td><td>Number of labyrinth rows. </td></tr>
-    <tr><td class="paramname">s</td><td>Data structure of snake type. </td></tr>
+    <tr><td class="paramname">l</td><td>Pointer to the labyrinth_t structure to initialize. </td></tr>
+    <tr><td class="paramname">M</td><td>The width of the labyrinth. </td></tr>
+    <tr><td class="paramname">N</td><td>The height of the labyrinth. </td></tr>
+    <tr><td class="paramname">s</td><td>Pointer to the snake_t structure representing the snake. </td></tr>
   </table>
   </dd>
 </dl>
@@ -422,11 +634,11 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Main function for interactive mode. </p>
+<p>Runs the labyrinth game in interactive mode. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">M</td><td>Number of labyrinth columns. </td></tr>
-    <tr><td class="paramname">N</td><td>Number of labyrinth rows. </td></tr>
+    <tr><td class="paramname">M</td><td>The width of the labyrinth. </td></tr>
+    <tr><td class="paramname">N</td><td>The height of the labyrinth. </td></tr>
   </table>
   </dd>
 </dl>
@@ -471,13 +683,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function to print the labyrinth. </p>
+<p>Prints the current state of the labyrinth game. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">l</td><td>Data structure of labyrinth type. </td></tr>
-    <tr><td class="paramname">M</td><td>Number of labyrinth columns. </td></tr>
-    <tr><td class="paramname">N</td><td>Number of labyrinth rows. </td></tr>
-    <tr><td class="paramname">s</td><td>Data structure of snake type. </td></tr>
+    <tr><td class="paramname">l</td><td>Pointer to the labyrinth_t structure. </td></tr>
+    <tr><td class="paramname">M</td><td>The width of the labyrinth. </td></tr>
+    <tr><td class="paramname">N</td><td>The height of the labyrinth. </td></tr>
+    <tr><td class="paramname">s</td><td>Pointer to the snake_t structure representing the snake. </td></tr>
   </table>
   </dd>
 </dl>
@@ -546,17 +758,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function to receive input from the user and change the position of the snake. </p>
+<p>Handles user input for moves and updates the game state accordingly. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">move</td><td>Pointer variable to save the current move entered. </td></tr>
-    <tr><td class="paramname">moves</td><td>Char array to save the total number of moves. </td></tr>
-    <tr><td class="paramname">row</td><td>Pointer variable to the row of the labyrinth. </td></tr>
-    <tr><td class="paramname">col</td><td>Pointer variable to the column of the labyrinth. </td></tr>
-    <tr><td class="paramname">score</td><td>Variable for storing the game's score. </td></tr>
-    <tr><td class="paramname">s</td><td>Data structure of snake type. </td></tr>
-    <tr><td class="paramname">l</td><td>Data structure of labyrinth type. </td></tr>
-    <tr><td class="paramname">mode</td><td>Variable that contains the chosen game mode. </td></tr>
+    <tr><td class="paramname">move</td><td>Pointer to save the current move entered. </td></tr>
+    <tr><td class="paramname">moves</td><td>Pointer to save the total number of moves. </td></tr>
+    <tr><td class="paramname">row</td><td>Pointer to the current row of the labyrinth. </td></tr>
+    <tr><td class="paramname">col</td><td>Pointer to the current column of the labyrinth. </td></tr>
+    <tr><td class="paramname">score</td><td>Pointer to store the game's score. </td></tr>
+    <tr><td class="paramname">head</td><td>Pointer to the snake's head. </td></tr>
+    <tr><td class="paramname">l</td><td>Pointer to the labyrinth. </td></tr>
+    <tr><td class="paramname">mode</td><td>The mode of the game (1 for interactive, 0 default value (indicates the AI mode)). </td></tr>
   </table>
   </dd>
 </dl>
@@ -601,13 +813,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Function to control obstacles (walls and invalid positions) and objects to collect. </p>
+<p>Checks for obstacles, borders and bjects to collect and handles collisions. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">l</td><td>Data structure of labyrinth type. </td></tr>
-    <tr><td class="paramname">head</td><td>Data structure of snake type. </td></tr>
-    <tr><td class="paramname">row</td><td>Pointer variable to the row of the labyrinth. </td></tr>
-    <tr><td class="paramname">col</td><td>Pointer variable to the column of the labyrinth. </td></tr>
+    <tr><td class="paramname">l</td><td>Pointer to the labyrinth. </td></tr>
+    <tr><td class="paramname">head</td><td>Pointer to the snake's head. </td></tr>
+    <tr><td class="paramname">row</td><td>Pointer to the current row position. </td></tr>
+    <tr><td class="paramname">col</td><td>Pointer to the current column position. </td></tr>
   </table>
   </dd>
 </dl>

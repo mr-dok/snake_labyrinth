@@ -13,95 +13,171 @@
 #include <stdbool.h>
 
 /**
- * @brief Data structure to represent the snake.
+ * @struct snake
+ * @brief Represents the snake.
  */
 typedef struct snake snake_t;
 
 /**
- * @brief Data structure to represent the labyrinth.
+ * @struct labyrinth
+ * @brief Represents the labyrinth.
  */
 typedef struct labyrinth labyrinth_t;
 
 /**
- * @brief Function to initialize the data structures.
+ * @fn void labyrinth_init (labyrinth_t *l, int M, int N, snake_t *s)
+ * @brief Initializes the data structures.
  *
- * @param l Data structure of labyrinth type.
- * @param M Number of labyrinth columns.
- * @param N Number of labyrinth rows.
- * @param s Data structure of snake type.
+ * @param l Pointer to the labyrinth_t structure to initialize.
+ * @param M The width of the labyrinth.
+ * @param N The height of the labyrinth.
+ * @param s Pointer to the snake_t structure representing the snake.
  */
 void labyrinth_init (labyrinth_t *l, int M, int N, snake_t *s);
 
 /**
- * @brief Function to free the occupied memory.
+ * @fn void labyrinth_free (labyrinth_t *l, snake_t *s)
+ * @brief Frees the occupied memory for the labyrinth and snake structures.
  *
- * @param l Data structure of labyrinth type.
- * @param s Data structure of snake type.
+ * @param l Pointer to the labyrinth_t structure to free.
+ * @param s Pointer to the snake_t structure to free.
  */
 void labyrinth_free (labyrinth_t *l, snake_t *s);
 
 /**
- * @brief Function to print the labyrinth
+ * @fn void labyrinth_print (labyrinth_t *l, int M, int N, snake_t *s)
+ * @brief Prints the current state of the labyrinth game.
  *
- * @param l Data structure of labyrinth type.
- * @param M Number of labyrinth columns.
- * @param N Number of labyrinth rows.
- * @param s Data structure of snake type.
+ * @param l Pointer to the labyrinth_t structure.
+ * @param M The width of the labyrinth.
+ * @param N The height of the labyrinth.
+ * @param s Pointer to the snake_t structure representing the snake.
  */
 void labyrinth_print (labyrinth_t *l, int M, int N, snake_t *s);
 
 /**
- * @brief Function to find the initial position of the snake.
+ * @fn void find_initial_position (labyrinth_t *l, int *x, int *y)
+ * @brief Finds the initial position of the snake in the labyrinth.
  *
- * @param l Data structure of labyrinth type.
- * @param x Pointer variable to the x axis of the labyrinth.
- * @param y Pointer variable to the y axis of the labyrinth.
+ * @param l Pointer to the labyrinth_t structure.
+ * @param x Pointer to store the X-coordinate of the initial position.
+ * @param y Pointer to store the Y-coordinate of the initial position.
  */
 void find_initial_position (labyrinth_t *l, int *x, int *y);
 
 /**
- * @brief Function to receive input from the user and change the position of the snake. 
+ * @fn bool is_move_valid(labyrinth_t *l, int row, int col)
+ * @brief Checks if a move is valid within the labyrinth boundaries.
  *
- * @param move Pointer variable to save the current move entered.
- * @param moves Char array to save the total number of moves.
- * @param row Pointer variable to the row of the labyrinth.
- * @param col Pointer variable to the column of the labyrinth.
- * @param score Variable for storing the game's score.
- * @param s Data structure of snake type.
- * @param l Data structure of labyrinth type.
- * @param mode Variable that contains the chosen game mode.
+ * @param l Pointer to the labyrinth_t structure.
+ * @param row The row coordinate of the move.
+ * @param col The column coordinate of the move.
+ * @return true if the move is valid, false otherwise.
  */
+bool is_move_valid(labyrinth_t *l, int row, int col);
 
+/**
+ * @fn void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *s, labyrinth_t *l, int mode)
+ * @brief Handles user input for moves and updates the game state accordingly.
+ *
+ * @param move Pointer to save the current move entered.
+ * @param moves Pointer to save the total number of moves.
+ * @param row Pointer to the current row of the labyrinth.
+ * @param col Pointer to the current column of the labyrinth.
+ * @param score Pointer to store the game's score.
+ * @param head Pointer to the snake's head.
+ * @param l Pointer to the labyrinth.
+ * @param mode The mode of the game (1 for interactive, 0 default value (indicates the AI mode)).
+ */
 void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *s, labyrinth_t *l, int mode);
 
 /**
- * @brief Function to control obstacles (walls and invalid positions) and objects to collect. 
+ * @fn void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col)
+ * @brief Checks for obstacles, borders and bjects to collect and handles collisions. 
  *
- * @param l Data structure of labyrinth type.
- * @param head Data structure of snake type.
- * @param row Pointer variable to the row of the labyrinth.
- * @param col Pointer variable to the column of the labyrinth.
+ * @param l Pointer to the labyrinth.
+ * @param head Pointer to the snake's head.
+ * @param row Pointer to the current row position.
+ * @param col Pointer to the current column position.
  */
-
 void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col);
 
+/**
+ * @fn add_tail (snake_t *head)
+ * @brief Adds a new tail segment to the snake.
+ *
+ * @param head Pointer to the snake's head.
+ */
 void add_tail (snake_t *head); 
 
+/**
+ * @fn void check_dead_ends (labyrinth_t *l, snake_t *head)
+ * @brief Checks for dead ends and moves the snake accordingly.
+ *
+ * @param l Pointer to the labyrinth.
+ * @param head Pointer to the snake's head.
+ */
 void check_dead_ends (labyrinth_t *l, snake_t *head); 
 
 /**
- * @brief Main function for interactive mode.
+ * @fn void labyrinth_interactive_mode_run (int M, int N)
+ * @brief Runs the labyrinth game in interactive mode.
  *
- * @param M Number of labyrinth columns.
- * @param N Number of labyrinth rows.
+ * @param M The width of the labyrinth.
+ * @param N The height of the labyrinth.
  */
 void labyrinth_interactive_mode_run (int M, int N);
 
 /**
- * @brief Main function for AI mode.
+ * @fn checkXWest(labyrinth_t* l, int row, int col)
+ * @brief Checks if it's safe to move to the west.
  *
- * @param M Number of labyrinth columns.
- * @param N Number of labyrinth rows.
+ * @param l Pointer to the labyrinth.
+ * @param row The current row position.
+ * @param col The current column position.
+ * @return 1 if it's safe to move, 0 otherwise.
+ */
+int checkXWest(labyrinth_t* l, int row, int col);
+
+/**
+ * @fn checkXEast(labyrinth_t* l, int row, int col)
+ * @brief Checks if it's safe to move to the east.
+ *
+ * @param l Pointer to the labyrinth.
+ * @param row The current row position.
+ * @param col The current column position.
+ * @return 1 if it's safe to move, 0 otherwise.
+ */
+int checkXEast(labyrinth_t* l, int row, int col);
+
+/**
+ * @fn checkYNorth(labyrinth_t* l, int row, int col)
+ * @brief Checks if it's safe to move to the north.
+ *
+ * @param l Pointer to the labyrinth.
+ * @param row The current row position.
+ * @param col The current column position.
+ * @return 1 if it's safe to move, 0 otherwise.
+ */
+int checkYNorth(labyrinth_t* l, int row, int col);
+
+/**
+ * @fn checkYSouth(labyrinth_t* l, int row, int col)
+ * @brief Checks if it's safe to move to the south.
+ *
+ * @param l Pointer to the labyrinth.
+ * @param row The current row position.
+ * @param col The current column position.
+ * @return 1 if it's safe to move, 0 otherwise.
+ */
+int checkYSouth(labyrinth_t* l, int row, int col);
+
+/**
+ * @fn void labyrinth_AI_mode_run (int M, int N)
+ * @brief Runs the labyrinth game in AI mode.
+ *
+ * @param M The width of the labyrinth.
+ * @param N The height of the labyrinth.
  */
 void labyrinth_AI_mode_run (int M, int N);
 

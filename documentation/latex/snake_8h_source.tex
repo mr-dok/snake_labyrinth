@@ -6,26 +6,40 @@
 \DoxyCodeLine{00012\ \textcolor{preprocessor}{\#define\ snake\_h}}
 \DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
 \DoxyCodeLine{00014\ }
-\DoxyCodeLine{00018\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsnake}{snake}}\ snake\_t;}
-\DoxyCodeLine{00019\ }
-\DoxyCodeLine{00023\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlabyrinth}{labyrinth}}\ labyrinth\_t;}
-\DoxyCodeLine{00024\ }
-\DoxyCodeLine{00033\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_a2d83b8480d86f05d028360c36f7a9335}{labyrinth\_init}}\ (labyrinth\_t\ *l,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a0607947751248ffb245cb463d1e470dc}{M}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a4fddd68e88f981444449ba3dc46c0014}{N}},\ snake\_t\ *s);}
-\DoxyCodeLine{00034\ }
-\DoxyCodeLine{00041\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_acd65deeb26f89dd33e84b31afe2e9be4}{labyrinth\_free}}\ (labyrinth\_t\ *l,\ snake\_t\ *s);}
-\DoxyCodeLine{00042\ }
-\DoxyCodeLine{00051\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_af4dd7c26af7f07c5ac92755a599d7c80}{labyrinth\_print}}\ (labyrinth\_t\ *l,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a0607947751248ffb245cb463d1e470dc}{M}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a4fddd68e88f981444449ba3dc46c0014}{N}},\ snake\_t\ *s);}
-\DoxyCodeLine{00052\ }
-\DoxyCodeLine{00060\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_a915c7e724f85b799ab526287b0b18577}{find\_initial\_position}}\ (labyrinth\_t\ *l,\ \textcolor{keywordtype}{int}\ *x,\ \textcolor{keywordtype}{int}\ *y);}
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00075\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_a314e7c365311d5713a3ac16b24edbeb0}{moves\_input}}\ (\textcolor{keywordtype}{char}\ *move,\ \textcolor{keywordtype}{char}\ *moves,\ \textcolor{keywordtype}{int}\ *row,\ \textcolor{keywordtype}{int}\ *col,\ \textcolor{keywordtype}{int}\ *\mbox{\hyperlink{structlabyrinth_afd76e45012bd235bf9e4ec229c86a42b}{score}},\ snake\_t\ *s,\ labyrinth\_t\ *l,\ \textcolor{keywordtype}{int}\ mode);}
-\DoxyCodeLine{00076\ }
-\DoxyCodeLine{00086\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_ac714958e0c94c71011c20e328b190713}{obstacles\_borders\_check}}\ (labyrinth\_t\ *l,\ snake\_t\ *head,\ \textcolor{keywordtype}{int}\ *row,\ \textcolor{keywordtype}{int}\ *col);}
-\DoxyCodeLine{00087\ }
-\DoxyCodeLine{00094\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_a8f15eb264cdcabee8d3c7d7146ceb1f7}{labyrinth\_interactive\_mode\_run}}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a0607947751248ffb245cb463d1e470dc}{M}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a4fddd68e88f981444449ba3dc46c0014}{N}});}
-\DoxyCodeLine{00095\ }
-\DoxyCodeLine{00102\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_a136d1e8d84e2266fbe84f6c115040ec1}{labyrinth\_AI\_mode\_run}}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a0607947751248ffb245cb463d1e470dc}{M}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a4fddd68e88f981444449ba3dc46c0014}{N}});}
-\DoxyCodeLine{00103\ }
-\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00019\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structsnake}{snake}}\ snake\_t;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlabyrinth}{labyrinth}}\ labyrinth\_t;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_a2d83b8480d86f05d028360c36f7a9335}{labyrinth\_init}}\ (labyrinth\_t\ *l,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a0607947751248ffb245cb463d1e470dc}{M}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a4fddd68e88f981444449ba3dc46c0014}{N}},\ snake\_t\ *s);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_acd65deeb26f89dd33e84b31afe2e9be4}{labyrinth\_free}}\ (labyrinth\_t\ *l,\ snake\_t\ *s);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00056\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_af4dd7c26af7f07c5ac92755a599d7c80}{labyrinth\_print}}\ (labyrinth\_t\ *l,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a0607947751248ffb245cb463d1e470dc}{M}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a4fddd68e88f981444449ba3dc46c0014}{N}},\ snake\_t\ *s);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00066\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_a915c7e724f85b799ab526287b0b18577}{find\_initial\_position}}\ (labyrinth\_t\ *l,\ \textcolor{keywordtype}{int}\ *x,\ \textcolor{keywordtype}{int}\ *y);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00077\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{snake_8h_ad6e46557bdf7449620dcc1d92fb54741}{is\_move\_valid}}(labyrinth\_t\ *l,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00092\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_a314e7c365311d5713a3ac16b24edbeb0}{moves\_input}}\ (\textcolor{keywordtype}{char}\ *move,\ \textcolor{keywordtype}{char}\ *moves,\ \textcolor{keywordtype}{int}\ *row,\ \textcolor{keywordtype}{int}\ *col,\ \textcolor{keywordtype}{int}\ *\mbox{\hyperlink{structlabyrinth_afd76e45012bd235bf9e4ec229c86a42b}{score}},\ snake\_t\ *s,\ labyrinth\_t\ *l,\ \textcolor{keywordtype}{int}\ mode);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00103\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_ac714958e0c94c71011c20e328b190713}{obstacles\_borders\_check}}\ (labyrinth\_t\ *l,\ snake\_t\ *head,\ \textcolor{keywordtype}{int}\ *row,\ \textcolor{keywordtype}{int}\ *col);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00111\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_af1c45d9f8d4376d14696e63c224545a6}{add\_tail}}\ (snake\_t\ *head);\ }
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00120\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_a60263fa58e443d898df01c3a170817ba}{check\_dead\_ends}}\ (labyrinth\_t\ *l,\ snake\_t\ *head);\ }
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00129\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_a8f15eb264cdcabee8d3c7d7146ceb1f7}{labyrinth\_interactive\_mode\_run}}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a0607947751248ffb245cb463d1e470dc}{M}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a4fddd68e88f981444449ba3dc46c0014}{N}});}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00140\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{snake_8h_a0cba947a836173e3af281dda6f40ce0f}{checkXWest}}(labyrinth\_t*\ l,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00151\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{snake_8h_ac0e24dfc247c2b86c9bdc82860418e74}{checkXEast}}(labyrinth\_t*\ l,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00162\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{snake_8h_a956bbd81ff79a0195d6fb560fde11b1e}{checkYNorth}}(labyrinth\_t*\ l,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00173\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{snake_8h_a0bc11b9bb548dc506bc928136c9ec480}{checkYSouth}}(labyrinth\_t*\ l,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00182\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{snake_8h_a136d1e8d84e2266fbe84f6c115040ec1}{labyrinth\_AI\_mode\_run}}\ (\textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a0607947751248ffb245cb463d1e470dc}{M}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlabyrinth_a4fddd68e88f981444449ba3dc46c0014}{N}});}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}
