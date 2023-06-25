@@ -115,6 +115,7 @@ void check_dead_ends (labyrinth_t *l, snake_t *head);
  */
 void labyrinth_interactive_mode_run (int M, int N);
 
+<<<<<<< HEAD
 /**
  * @fn int checkXWest(labyrinth_t* l, int row, int col)
  * @brief Checks if it's safe to move to the west.
@@ -168,4 +169,6 @@ int checkYSouth(labyrinth_t* l, int row, int col);
  */
 void labyrinth_AI_mode_run (int M, int N);
 
+=======
+>>>>>>> 1624ea31bd9a26a92ec598deea45db837e111bc9
 #endif

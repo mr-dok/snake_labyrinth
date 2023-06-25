@@ -376,6 +376,7 @@ void labyrinth_interactive_mode_run (int M, int N) {
   labyrinth_free(l, s);
   exit(0);
 }
+<<<<<<< HEAD
 
 int checkXWest(labyrinth_t *l, int row, int col) {
   if(col-1< 0 || l->labyrinth_matrix[row][col-1] == '#')
@@ -493,3 +494,5 @@ void labyrinth_AI_mode_run(int M, int N) {
   labyrinth_free(l, s);
   exit(0);
 }
+=======
+>>>>>>> 1624ea31bd9a26a92ec598deea45db837e111bc9

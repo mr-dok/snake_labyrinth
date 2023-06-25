@@ -16,6 +16,7 @@
 #include "colors.h"
 
 int main (void) {
+<<<<<<< HEAD
   int M = 0, N = 0, game_mode = 0; 
 
   system("clear");
@@ -36,6 +37,9 @@ int main (void) {
 
   system("clear");
 
+=======
+  int M = 0, N = 0;
+>>>>>>> 1624ea31bd9a26a92ec598deea45db837e111bc9
   printf(BOLD_COLOR_WHITE "Enter the number of columns: " COLOR_RESET);  
   while (scanf("%d", &M) == 0) {
     int c;
@@ -54,10 +58,14 @@ int main (void) {
   }
   getchar();
   
+<<<<<<< HEAD
   system("clear");
 
   if (game_mode == 1) labyrinth_interactive_mode_run(M, N);
   else labyrinth_AI_mode_run(M, N);
 
+=======
+  labyrinth_interactive_mode_run(M, N);
+>>>>>>> 1624ea31bd9a26a92ec598deea45db837e111bc9
   return 0;
 }
