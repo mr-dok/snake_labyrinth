@@ -73,9 +73,9 @@ void labyrinth_free (labyrinth_t *l, snake_t *s) {
   free(s);
 }
 
-void labyrinth_print (labyrinth_t *l, int M, int N, snake_t *s) {
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j < M; j++) {
+void labyrinth_print (labyrinth_t *l, snake_t *s) {
+  for (int i = 0; i < l->N; i++) {
+    for (int j = 0; j < l->M; j++) {
       if (j == s->x_snake_pos && i == s->y_snake_pos) {
         printf(BOLD_COLOR_WHITE "%c ", s->head);
         printf(COLOR_RESET);
@@ -140,14 +140,6 @@ void find_initial_position (labyrinth_t *l, int *x, int *y) {
     j = 0;
     i++;
   }
-}
-
-bool is_move_valid (labyrinth_t *l, int row, int col) {
-  
-  if (row < 0 || row == l->N || col < 0 || col == l->M) {
-    return false;
-  }
-  return true;
 }
 
 void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *head, labyrinth_t *l, int mode) {
@@ -353,7 +345,7 @@ void labyrinth_interactive_mode_run (int M, int N) {
 
   while (!win) {
     system("clear");
-    labyrinth_print(l, M, N, s);
+    labyrinth_print(l, s);
 
     int row = s->y_snake_pos, col = s->x_snake_pos;
 
@@ -387,9 +379,9 @@ void labyrinth_interactive_mode_run (int M, int N) {
 
 int checkXWest(labyrinth_t *l, int row, int col) {
   if(col-1< 0 || l->labyrinth_matrix[row][col-1] == '#')
-    return 0; /*If we can't move we return 0 and continue with the wall follower algorithm*/
+    return 0;  
   else
-    return 1;/*we return 1 indicating it's safe to move*/
+    return 1;
 }
 
 int checkXEast(labyrinth_t *l, int row, int col) {
@@ -427,7 +419,7 @@ void labyrinth_AI_mode_run(int M, int N) {
 
   while (!win) {
     system("clear");
-    labyrinth_print(l, M, N, s);
+    labyrinth_print(l, s);
 
     int row = s->y_snake_pos, col = s->x_snake_pos;
 
@@ -477,7 +469,6 @@ void labyrinth_AI_mode_run(int M, int N) {
       }
     }
     moves_input(&move, tmp++, &row, &col, &l->score, s, l, 0);
-    //obstacles_borders_check(l, s, &row, &col);
     
     if (l->labyrinth_matrix[row][col] == '_') {
       *(tmp++) = '\0';
@@ -488,8 +479,6 @@ void labyrinth_AI_mode_run(int M, int N) {
       win = true; 
       free(moves);
     } else {
-      //check_dead_ends(l, s);  
-
       if (l->labyrinth_matrix[row][col] == '$') {
         l->score += 10;
         l->labyrinth_matrix[row][col] = ' ';

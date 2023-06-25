@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['obstacles_5fborders_5fcheck_0',['obstacles_borders_check',['../snake_8c.html#ac714958e0c94c71011c20e328b190713',1,'obstacles_borders_check(labyrinth_t *l, snake_t *head, int *row, int *col):&#160;snake.c'],['../snake_8h.html#ac714958e0c94c71011c20e328b190713',1,'obstacles_borders_check(labyrinth_t *l, snake_t *head, int *row, int *col):&#160;snake.c']]]
+  ['score_0',['score',['../structlabyrinth.html#afd76e45012bd235bf9e4ec229c86a42b',1,'labyrinth']]],
+  ['snake_1',['snake',['../structsnake.html',1,'']]],
+  ['snake_2ec_2',['snake.c',['../snake_8c.html',1,'']]],
+  ['snake_2eh_3',['snake.h',['../snake_8h.html',1,'']]]
 ];

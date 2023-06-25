@@ -24,7 +24,7 @@ int main (void) {
   printf(BOLD_COLOR_WHITE "2. AI mode\n" COLOR_RESET); 
   printf(BOLD_COLOR_WHITE "Select the game mode: " COLOR_RESET); 
   
-  while (scanf("%d", &game_mode) == 0) {
+  while (scanf("%d", &game_mode) == 0 || (game_mode != 1 && game_mode != 2)) {
     int c;
     while((c=getchar())!='\n' && c!=EOF); //Clear the stdin
     printf("Invalid input. Try again\n");

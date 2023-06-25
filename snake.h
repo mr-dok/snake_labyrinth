@@ -45,15 +45,13 @@ void labyrinth_init (labyrinth_t *l, int M, int N, snake_t *s);
 void labyrinth_free (labyrinth_t *l, snake_t *s);
 
 /**
- * @fn void labyrinth_print (labyrinth_t *l, int M, int N, snake_t *s)
+ * @fn void labyrinth_print (labyrinth_t *l, snake_t *s)
  * @brief Prints the current state of the labyrinth game.
  *
  * @param l Pointer to the labyrinth_t structure.
- * @param M The width of the labyrinth.
- * @param N The height of the labyrinth.
  * @param s Pointer to the snake_t structure representing the snake.
  */
-void labyrinth_print (labyrinth_t *l, int M, int N, snake_t *s);
+void labyrinth_print (labyrinth_t *l, snake_t *s);
 
 /**
  * @fn void find_initial_position (labyrinth_t *l, int *x, int *y)
@@ -66,18 +64,7 @@ void labyrinth_print (labyrinth_t *l, int M, int N, snake_t *s);
 void find_initial_position (labyrinth_t *l, int *x, int *y);
 
 /**
- * @fn bool is_move_valid(labyrinth_t *l, int row, int col)
- * @brief Checks if a move is valid within the labyrinth boundaries.
- *
- * @param l Pointer to the labyrinth_t structure.
- * @param row The row coordinate of the move.
- * @param col The column coordinate of the move.
- * @return true if the move is valid, false otherwise.
- */
-bool is_move_valid(labyrinth_t *l, int row, int col);
-
-/**
- * @fn void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *s, labyrinth_t *l, int mode)
+ * @fn void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *head, labyrinth_t *l, int mode)
  * @brief Handles user input for moves and updates the game state accordingly.
  *
  * @param move Pointer to save the current move entered.
@@ -89,7 +76,7 @@ bool is_move_valid(labyrinth_t *l, int row, int col);
  * @param l Pointer to the labyrinth.
  * @param mode The mode of the game (1 for interactive, 0 default value (indicates the AI mode)).
  */
-void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *s, labyrinth_t *l, int mode);
+void moves_input (char *move, char *moves, int *row, int *col, int *score, snake_t *head, labyrinth_t *l, int mode);
 
 /**
  * @fn void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col)
@@ -103,7 +90,7 @@ void moves_input (char *move, char *moves, int *row, int *col, int *score, snake
 void obstacles_borders_check (labyrinth_t *l, snake_t *head, int *row, int *col);
 
 /**
- * @fn add_tail (snake_t *head)
+ * @fn void add_tail (snake_t *head)
  * @brief Adds a new tail segment to the snake.
  *
  * @param head Pointer to the snake's head.
@@ -129,7 +116,7 @@ void check_dead_ends (labyrinth_t *l, snake_t *head);
 void labyrinth_interactive_mode_run (int M, int N);
 
 /**
- * @fn checkXWest(labyrinth_t* l, int row, int col)
+ * @fn int checkXWest(labyrinth_t* l, int row, int col)
  * @brief Checks if it's safe to move to the west.
  *
  * @param l Pointer to the labyrinth.
@@ -140,7 +127,7 @@ void labyrinth_interactive_mode_run (int M, int N);
 int checkXWest(labyrinth_t* l, int row, int col);
 
 /**
- * @fn checkXEast(labyrinth_t* l, int row, int col)
+ * @fn int checkXEast(labyrinth_t* l, int row, int col)
  * @brief Checks if it's safe to move to the east.
  *
  * @param l Pointer to the labyrinth.
@@ -151,7 +138,7 @@ int checkXWest(labyrinth_t* l, int row, int col);
 int checkXEast(labyrinth_t* l, int row, int col);
 
 /**
- * @fn checkYNorth(labyrinth_t* l, int row, int col)
+ * @fn int checkYNorth(labyrinth_t* l, int row, int col)
  * @brief Checks if it's safe to move to the north.
  *
  * @param l Pointer to the labyrinth.
@@ -162,7 +149,7 @@ int checkXEast(labyrinth_t* l, int row, int col);
 int checkYNorth(labyrinth_t* l, int row, int col);
 
 /**
- * @fn checkYSouth(labyrinth_t* l, int row, int col)
+ * @fn int checkYSouth(labyrinth_t* l, int row, int col)
  * @brief Checks if it's safe to move to the south.
  *
  * @param l Pointer to the labyrinth.

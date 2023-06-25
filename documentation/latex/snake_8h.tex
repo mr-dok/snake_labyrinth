@@ -13,13 +13,11 @@ void \mbox{\hyperlink{snake_8h_a2d83b8480d86f05d028360c36f7a9335}{labyrinth\+\_\
 \begin{DoxyCompactList}\small\item\em Initializes the data structures. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{snake_8h_acd65deeb26f89dd33e84b31afe2e9be4}{labyrinth\+\_\+free}} (labyrinth\+\_\+t $\ast$l, snake\+\_\+t $\ast$s)
 \begin{DoxyCompactList}\small\item\em Frees the occupied memory for the labyrinth and snake structures. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{snake_8h_af4dd7c26af7f07c5ac92755a599d7c80}{labyrinth\+\_\+print}} (labyrinth\+\_\+t $\ast$l, int M, int N, snake\+\_\+t $\ast$s)
+void \mbox{\hyperlink{snake_8h_adf4bff5ca8b8609d556e6b8fa3c8ed44}{labyrinth\+\_\+print}} (labyrinth\+\_\+t $\ast$l, snake\+\_\+t $\ast$s)
 \begin{DoxyCompactList}\small\item\em Prints the current state of the labyrinth game. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{snake_8h_a915c7e724f85b799ab526287b0b18577}{find\+\_\+initial\+\_\+position}} (labyrinth\+\_\+t $\ast$l, int $\ast$x, int $\ast$y)
 \begin{DoxyCompactList}\small\item\em Finds the initial position of the snake in the labyrinth. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{snake_8h_ad6e46557bdf7449620dcc1d92fb54741}{is\+\_\+move\+\_\+valid}} (labyrinth\+\_\+t $\ast$l, int row, int col)
-\begin{DoxyCompactList}\small\item\em Checks if a move is valid within the labyrinth boundaries. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{snake_8h_a314e7c365311d5713a3ac16b24edbeb0}{moves\+\_\+input}} (char $\ast$move, char $\ast$moves, int $\ast$row, int $\ast$col, int $\ast$score, snake\+\_\+t $\ast$s, labyrinth\+\_\+t $\ast$l, int mode)
+void \mbox{\hyperlink{snake_8h_a2e6ac01d8773c1f85892a883ff9d78ee}{moves\+\_\+input}} (char $\ast$move, char $\ast$moves, int $\ast$row, int $\ast$col, int $\ast$score, snake\+\_\+t $\ast$head, labyrinth\+\_\+t $\ast$l, int mode)
 \begin{DoxyCompactList}\small\item\em Handles user input for moves and updates the game state accordingly. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{snake_8h_ac714958e0c94c71011c20e328b190713}{obstacles\+\_\+borders\+\_\+check}} (labyrinth\+\_\+t $\ast$l, snake\+\_\+t $\ast$head, int $\ast$row, int $\ast$col)
 \begin{DoxyCompactList}\small\item\em Checks for obstacles, borders and bjects to collect and handles collisions. \end{DoxyCompactList}\item 
@@ -195,28 +193,6 @@ Finds the initial position of the snake in the labyrinth.
 {\em y} & Pointer to store the Y-\/coordinate of the initial position. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{snake_8h_ad6e46557bdf7449620dcc1d92fb54741}\label{snake_8h_ad6e46557bdf7449620dcc1d92fb54741}} 
-\index{snake.h@{snake.h}!is\_move\_valid@{is\_move\_valid}}
-\index{is\_move\_valid@{is\_move\_valid}!snake.h@{snake.h}}
-\doxysubsubsection{\texorpdfstring{is\_move\_valid()}{is\_move\_valid()}}
-{\footnotesize\ttfamily bool is\+\_\+move\+\_\+valid (\begin{DoxyParamCaption}\item[{labyrinth\+\_\+t $\ast$}]{l,  }\item[{int}]{row,  }\item[{int}]{col }\end{DoxyParamCaption})}
-
-
-
-Checks if a move is valid within the labyrinth boundaries. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em l} & Pointer to the labyrinth\+\_\+t structure. \\
-\hline
-{\em row} & The row coordinate of the move. \\
-\hline
-{\em col} & The column coordinate of the move. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-true if the move is valid, false otherwise. 
-\end{DoxyReturn}
 \mbox{\Hypertarget{snake_8h_a136d1e8d84e2266fbe84f6c115040ec1}\label{snake_8h_a136d1e8d84e2266fbe84f6c115040ec1}} 
 \index{snake.h@{snake.h}!labyrinth\_AI\_mode\_run@{labyrinth\_AI\_mode\_run}}
 \index{labyrinth\_AI\_mode\_run@{labyrinth\_AI\_mode\_run}!snake.h@{snake.h}}
@@ -289,11 +265,11 @@ Runs the labyrinth game in interactive mode.
 {\em N} & The height of the labyrinth. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{snake_8h_af4dd7c26af7f07c5ac92755a599d7c80}\label{snake_8h_af4dd7c26af7f07c5ac92755a599d7c80}} 
+\mbox{\Hypertarget{snake_8h_adf4bff5ca8b8609d556e6b8fa3c8ed44}\label{snake_8h_adf4bff5ca8b8609d556e6b8fa3c8ed44}} 
 \index{snake.h@{snake.h}!labyrinth\_print@{labyrinth\_print}}
 \index{labyrinth\_print@{labyrinth\_print}!snake.h@{snake.h}}
 \doxysubsubsection{\texorpdfstring{labyrinth\_print()}{labyrinth\_print()}}
-{\footnotesize\ttfamily void labyrinth\+\_\+print (\begin{DoxyParamCaption}\item[{labyrinth\+\_\+t $\ast$}]{l,  }\item[{int}]{M,  }\item[{int}]{N,  }\item[{snake\+\_\+t $\ast$}]{s }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void labyrinth\+\_\+print (\begin{DoxyParamCaption}\item[{labyrinth\+\_\+t $\ast$}]{l,  }\item[{snake\+\_\+t $\ast$}]{s }\end{DoxyParamCaption})}
 
 
 
@@ -303,14 +279,10 @@ Prints the current state of the labyrinth game.
 \begin{DoxyParams}{Parameters}
 {\em l} & Pointer to the labyrinth\+\_\+t structure. \\
 \hline
-{\em M} & The width of the labyrinth. \\
-\hline
-{\em N} & The height of the labyrinth. \\
-\hline
 {\em s} & Pointer to the snake\+\_\+t structure representing the snake. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{snake_8h_a314e7c365311d5713a3ac16b24edbeb0}\label{snake_8h_a314e7c365311d5713a3ac16b24edbeb0}} 
+\mbox{\Hypertarget{snake_8h_a2e6ac01d8773c1f85892a883ff9d78ee}\label{snake_8h_a2e6ac01d8773c1f85892a883ff9d78ee}} 
 \index{snake.h@{snake.h}!moves\_input@{moves\_input}}
 \index{moves\_input@{moves\_input}!snake.h@{snake.h}}
 \doxysubsubsection{\texorpdfstring{moves\_input()}{moves\_input()}}
