@@ -34,6 +34,8 @@ struct labyrinth {
 };
 
 void labyrinth_init (labyrinth_t *l, int M, int N, snake_t *s) {
+  FILE *file;
+  file = fopen("input.txt", "r");
   l->M = M;
   l->N = N;
   l->labyrinth_matrix = (char **) malloc(sizeof(char *) * N);
@@ -53,7 +55,8 @@ void labyrinth_init (labyrinth_t *l, int M, int N, snake_t *s) {
       free(l->labyrinth_matrix);
       return;
     }
-    scanf(" %[^\n]s", l->labyrinth_matrix[j]);
+    //scanf("%[ ^\n]s", l->labyrinth_matrix[j]);
+    fscanf(file, " %[^\n]s", l->labyrinth_matrix[j]);
   }
 
   l->score = 1000;
@@ -405,6 +408,35 @@ int checkYSouth(labyrinth_t *l, int row, int col) {
     return 1;
 }
 
+void print_final_labyrinth (labyrinth_t *l) {
+  for (int i = 0; i < l->N; i++) {
+    for (int j = 0; j < l->M; j++) {
+      if (l->labyrinth_matrix[i][j] == '#') {
+        printf(BOLD_COLOR_RED "%c ", l->labyrinth_matrix[i][j]);
+        printf(COLOR_RESET);
+      } else {
+        if (l->labyrinth_matrix[i][j] == '$') {
+          printf(BOLD_COLOR_PURPLE "%c ", l->labyrinth_matrix[i][j]);
+          printf(COLOR_RESET);
+        } else {
+          if (l->labyrinth_matrix[i][j] == 'T') {
+            printf(BOLD_COLOR_BLUE "%c ", l->labyrinth_matrix[i][j]);
+            printf(COLOR_RESET);
+          } else {
+            if (l->labyrinth_matrix[i][j] == '!') {
+              printf(BOLD_COLOR_GREEN "%c ", l->labyrinth_matrix[i][j]);
+              printf(COLOR_RESET);
+            } else {
+              printf("%c ", l->labyrinth_matrix[i][j]);
+            }
+          }
+        }
+      }
+    }
+    printf("\n");
+  }
+}
+
 void labyrinth_AI_mode_run(int M, int N) {
   labyrinth_t *l = (labyrinth_t *) malloc(sizeof(labyrinth_t));
   snake_t *s = (snake_t *) malloc(sizeof(snake_t));
@@ -484,12 +516,13 @@ void labyrinth_AI_mode_run(int M, int N) {
         l->labyrinth_matrix[row][col] = ' ';
         add_tail(s); 
       }
-
+      l->labyrinth_matrix[row][col] = '.';
       s->y_snake_pos = row;
       s->x_snake_pos = col;
     }
     move_prec = move;
   }
+  print_final_labyrinth(l);
   labyrinth_free(l, s);
   exit(0);
 }
